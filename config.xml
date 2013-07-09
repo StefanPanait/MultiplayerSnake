@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<widget xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    version="1.0.0.0" id="HelloWorldApp">   
+   
+    <name>goExchange</name> 
+    <author>Sky Penguins</author>
+    <description>Money Transfer app</description>
+
+	<!-- icon that represents the application on the Home screen of the BlackBerry device -->
+	<icon src=""/>
+
+    <content rim:allowInvokeParams="true" src="index.html" />
+
+	<feature id="blackberry.ui.dialog" />
+	<feature id="blackberry.ui.toast" />
+	<feature id="blackberry.event" required="true" />
+	<feature id="blackberry.ui.contextmenu" />
+	<feature id="blackberry.invoked" required="true" />
+	<feature id="blackberry.invoke" required="true" />
+	<feature id="blackberry.app" required="true">
+		<param name="mode" value="portrait" />
+	</feature>
+	
+	<access uri="http://virtualearth.net" subdomains="true" />
+    <access uri="http://bing.net" subdomains="true" />
+	
+	<access subdomains="true" uri="*"/>
+	<access subdomains="true" uri="http://gstatic.com"/>
+	<access subdomains="true" uri="http://google.com"/>
+	<access subdomains="true" uri="http://googleapis.com"/>
+
+	<rim:permissions>  
+        <rim:permit>read_geolocation</rim:permit>
+    </rim:permissions>
+	<rim:invoke-target id="com.skypenguins.rbcngi">
+		<type>APPLICATION</type>
+		<filter>
+			<action>bb.action.OPEN</action>
+			<mime-type>application/vnd.rim.nfc.ndef</mime-type>
+			<property value="ndef://1,ndef://2,ndef://4" var="uris" />
+		</filter>
+	</rim:invoke-target>
+
+	<feature id="blackberry.ui.toast" />
+	    <access uri="*" subdomains="true" />
+	    <feature id="blackberry.app.orientation">
+	    <param name="mode" value="portrait" />
+    </feature>
+
+</widget>
