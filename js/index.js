@@ -1,5 +1,5 @@
-var CANVAS_WIDTH = 769; //window.outerWidth; //720;//700;
-var CANVAS_HEIGHT = 1279; //window.outerHeight;//1280;//1100;
+var CANVAS_WIDTH = window.innerWidth; // 769; //
+var CANVAS_HEIGHT = window.innerHeight-1;//1279; //1280;//1100;
 var TILE_SIZE = 32;
 var FPS = 30;
 var canvas = false;
@@ -7,31 +7,45 @@ var ctx = false;
 
 
 $(document).ready(function() {
-//init canvas
     var ctx = document.createElement("canvas");
     ctx.setAttribute('width',CANVAS_WIDTH);
     ctx.setAttribute('height',CANVAS_HEIGHT);
     var container = document.getElementById("gesture");
     container.appendChild(ctx);
     canvas = ctx.getContext('2d');
+
+
 //init game
+    console.log("init");
     game.map = mapone;
+    Setup_Gesture_Recognition();
+    setInterval(function () {
+        update();
+        draw();
+    }, 1000 / FPS);
+    console.log("innerHeight is " +CANVAS_WIDTH);
 });
 
 
 
 
 function update() {
-    console.log("updating");
-    Update_Player_Direction();
-    if (Check_Player_Collision()) {
-        Update_Player_Location();
-    }
-    
-
+    Process_Movement();
 }
 
 var game = {
+    map: null,
+    spawn_locations: [],
+    collision: function(i, j, type) {
+        switch (type) {
+            case "boundary":
+                if ( game.map[j][i]==="b") {
+                    return true;
+                }
+                break;
+        }
+    }
+
 }
 
 function draw() {
@@ -41,13 +55,13 @@ function draw() {
 }
 
 var player = {
-    color: "#0AA",
+    color: "#00A",
     direction: "down",
     x: 32,
     y: 32,
     width: 32,
     height: 32,
-    speed: 4,
+    speed: 8,
     draw: function () {
         canvas.fillStyle = this.color;
         canvas.fillRect(this.x, this.y, this.width, this.height);
@@ -60,7 +74,7 @@ var Spawns = {
     color: "#0AA",
 }
 
-function Check_Player_Collision() {
+function Player_Movement_Allowed() {
     var x = player.x;
     var y = player.y;
     var i;
@@ -70,74 +84,59 @@ function Check_Player_Collision() {
             y = player.y - player.speed;
             i = Math.floor(x/TILE_SIZE);
             j = Math.floor(y/TILE_SIZE);
-            if ( game.map[j][i]!=="g") {
+            if (game.collision(i,j,"boundary") ) { //game.map[j][i]!=="g" && game.map[j][i]!=="y") {
                 return false;
             }
-            x += player.width;
+            x += player.width-1;
             i = Math.floor(x/TILE_SIZE);
-            if ( game.map[j][i]!=="g") {
+            if ( game.collision(i,j,"boundary") ) {//game.map[j][i]!=="g") {
                 return false;
             }
             break;
         case "down":
-            y = player.y + player.speed + TILE_SIZE;
+            y = player.y + player.speed + TILE_SIZE -1;
             i = Math.floor(x/TILE_SIZE);
             j = Math.floor(y/TILE_SIZE);
-            console.log(i + " "+j);
-            if ( game.map[j][i]!=="g") {
+            if ( game.collision(i,j,"boundary") ) {//game.map[j][i]!=="g") {
                 return false;
             }
-            x += player.width;
+            x += player.width-1;
             i = Math.floor(x/TILE_SIZE);
-            if ( game.map[j][i]!=="g") {
+            if ( game.collision(i,j,"boundary") ) {//game.map[j][i]!=="g") {
                 return false;
             }
             break;
         case "left":
             x = player.x - player.speed;
-
             i = Math.floor(x/TILE_SIZE);
             j = Math.floor(y/TILE_SIZE);
-            if ( game.map[j][i]!=="g") {
+            if ( game.collision(i,j,"boundary") ) {// game.map[j][i]!=="g") {
                 return false;
             }
-            y = player.y + player.height;
-            i = Math.floor(x/TILE_SIZE);
-            if ( game.map[j][i]!=="g") {
+            y = player.y + player.height-1;
+            j = Math.floor(y/TILE_SIZE);
+            if ( game.collision(i,j,"boundary") ) {// game.map[j][i]!=="g") {
                 return false;
             }
             break;
         case "right":
-            x = player.x + player.speed + TILE_SIZE;
+            x = player.x + player.speed + TILE_SIZE-1;
             i = Math.floor(x/TILE_SIZE);
             j = Math.floor(y/TILE_SIZE);
-            if ( game.map[j][i]!=="g") {
+            if ( game.collision(i,j,"boundary") ) {//game.map[j][i]!=="g") {
                 return false;
             }
-            y = player.y + player.height;
-            i = Math.floor(x/TILE_SIZE);
-            if ( game.map[j][i]!=="g") {
+            y = player.y + player.height-1;
+            j = Math.floor(y/TILE_SIZE);
+            if ( game.collision(i,j,"boundary") ) {//game.map[j][i]!=="g") {
                 return false;
             }
             break;
     }
-    switch (player.direction) {
-        case "up":
-            player.y -= player.speed;
-            break;
-        case "down":
-            player.y += player.speed;
-            break;
-        case "left":
-            player.x -= player.speed;
-            break;
-        case "right":
-            player.x += player.speed;
-            break;
-    }
+    return true;
 }
 
-function Update_Player_Direction() {
+function Player_Update_Direction() {
     if (keydown.left) {
         player.direction = "left";
     }
@@ -152,7 +151,7 @@ function Update_Player_Direction() {
     }
 }
 
-function Update_Player_Location() {
+function Player_Update_Location() {
     switch (player.direction) {
         case "up":
             player.y -= player.speed;
@@ -169,6 +168,25 @@ function Update_Player_Location() {
     }
 }
 
-//]]>
+function Process_Movement(){
+    Player_Update_Direction();
+    if (Player_Movement_Allowed()) {
+        Player_Update_Location();
+    }
+}
 
-//}
+function Load_Map_Spawns() {
+
+   var tile;
+
+   var i, j;   // the x and y loop variables
+   for(i=0; i<game.map.length; i++)
+   {
+      for(j=0; j<game.map[i].length; j++)
+      {
+         tile = mapData[i][j];   // get the tile, ie. 'r' or 'g'
+         drawTile(j, i, tile);
+      }
+   }
+
+}
