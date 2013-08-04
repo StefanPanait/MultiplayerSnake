@@ -6,11 +6,11 @@ var canvas = false;
 var ctx = false;
 
 
-$(document).ready(function() {
+/*$(document).ready(function() {
     var ctx = document.createElement("canvas");
     ctx.setAttribute('width',CANVAS_WIDTH);
     ctx.setAttribute('height',CANVAS_HEIGHT);
-    var container = document.getElementById("gesture");
+    var container = document.getElementById("gameCanvas");
     container.appendChild(ctx);
     canvas = ctx.getContext('2d');
 
@@ -18,13 +18,13 @@ $(document).ready(function() {
 //init game
     console.log("init");
     game.map = mapone;
-    Setup_Gesture_Recognition();
-    setInterval(function () {
-        update();
-        draw();
-    }, 1000 / FPS);
+    //Setup_Gesture_Recognition();
+   setInterval(function () {
+       update();
+       draw();
+   }, 1000 / FPS);
     console.log("innerHeight is " +CANVAS_WIDTH);
-});
+});*/
 
 
 

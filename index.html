@@ -16,11 +16,13 @@
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<script>
-			var meta = document.createElement("meta");
-			meta.setAttribute('name','viewport');
-			meta.setAttribute('content','initial-scale='+ (1/window.devicePixelRatio) + ',user-scalable=no');
-			document.getElementsByTagName('head')[0].appendChild(meta);
+		<script type="text/javascript">
+			(function () {
+				var meta = document.createElement('meta');
+				meta.setAttribute('name', 'viewport');
+				meta.setAttribute('content', 'initial-scale=' + (1.0 / window.devicePixelRatio) + ',user-scalable=no');
+				document.getElementsByTagName('head')[0].appendChild(meta);
+			}());
 		</script>
 		<title>Snake</title>
 		<!-- css -->
@@ -36,12 +38,11 @@
 		<script src="js/jquery.hotkeys.js" type="text/javascript"></script>
 		<script src="js/key_status.js" type="text/javascript"></script>
 		<script src="js/util.js" type="text/javascript"></script>
-		<!-- initialization -->
-		<script type="text/javascript">
-		</script>
 	</head>
 	<body>
 		<script src="js/index.js" type="text/javascript"></script>
-		<div id="gesture"></div>
+		<canvas id="gameCanvas"></canvas>
 	</body>
 	</html>
+		<!-- initialization -->
+	<script src="js/cocos2d.js"></script>
