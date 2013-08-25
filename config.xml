@@ -2,13 +2,13 @@
 <widget xmlns="http://www.w3.org/ns/widgets" 
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     version="1.0.0.0" id="Snake">   
-<!--  
-    <name>goExchange</name> 
+ 
+    <name>Snake</name> 
     <author>Sky Penguins</author>
     <description>Money Transfer app</description>
 
 	<!-- icon that represents the application on the Home screen of the BlackBerry device -->
-<!-- 	<icon src=""/>
+
 
     <content rim:allowInvokeParams="true" src="index.html" />
 
@@ -41,7 +41,7 @@
 			<property value="ndef://1,ndef://2,ndef://4" var="uris" />
 		</filter>
 	</rim:invoke-target>
--->
+
 	<feature id="blackberry.ui.toast" />
 	    <access uri="*" subdomains="true" />
 	    <feature id="blackberry.app.orientation">

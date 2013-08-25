@@ -3,7 +3,6 @@ var ccApplication = cc.Application.extend({
     ctor:function (scene) {
         this._super();
         this.startScene = scene;
-        
         cc.COCOS2D_DEBUG = this.config['COCOS2D_DEBUG'];
         cc.setup(this.config['tag']);
 
@@ -34,4 +33,4 @@ var ccApplication = cc.Application.extend({
         return true;
     }
 });
-var myApp = new ccApplication(SnakeScene);
+var myApp = new ccApplication(Menu.scene);

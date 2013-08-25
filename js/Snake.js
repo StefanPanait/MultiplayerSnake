@@ -2,6 +2,17 @@ var _g = {
     snake: null
 };
 
+/*console.log("running snake");
+var SnakeScene = cc.Scene.extend({
+    onEnter:function(){
+        this._super();
+        var layer = new Snake();
+        layer.init();
+        this.addChild(layer);
+    }
+})*/
+
+
 var Snake = cc.Layer.extend({
 
     physics: null,
@@ -132,7 +143,7 @@ var Snake = cc.Layer.extend({
             } else {
                 console.log(e.data.msg);
             }
-            
+
         });
         _g.snake = this;
         this.setKeyboardEnabled(true);
@@ -204,8 +215,6 @@ var Snake = cc.Layer.extend({
         this.player.cdirection = this.player.ndirection;
         this.player.speed = this.player.newSpeed;
       }
-      //this.player.cdirection = this.player.ndirection;
-        //console.log("current location: "+ this.player.cx + " : " + this.player.cy );
         switch (_g.snake.player.cdirection) {
             case 1:
                 this.player.nx = this.player.cx - this.player.speed;
@@ -235,14 +244,16 @@ var Snake = cc.Layer.extend({
 
 });
 
-var SnakeScene = cc.Scene.extend({
-    onEnter:function(){
-        this._super();
-        var layer = new Snake();
-        layer.init();
-        this.addChild(layer);
+Snake.layer = function () {
+    console.log('testing');
+    var sg = new Snake();
+    if (sg && sg.init()) {
+        return sg;
     }
-})
+    return null;
+};
+
+
 
 function NewBodyLocation() {
     var cx, cy, nx, ny, axis, amount;
