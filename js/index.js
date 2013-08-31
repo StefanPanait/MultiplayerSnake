@@ -1,5 +1,5 @@
 
 $(document).ready(function() {
-    Setup_Gesture_Recognition();
+    //Setup_Gesture_Recognition();
 });
 

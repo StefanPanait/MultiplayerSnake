@@ -22,12 +22,14 @@ var Snake = cc.Layer.extend({
 
     init:function()
     {
+
         var tmx, n;
         this._super();
 
         this.setKeyboardEnabled(true);
-
-        tmx = cc.TMXTiledMap.create('Maps/Level_One.xml');
+    console.log('testing1');
+        tmx = cc.TMXTiledMap.create('Maps/Level_Four.tmx');
+            console.log('testing2');
         this.physics = new Worker('js/Box2dWebWorker.js');
         this.physics.addEventListener('message', function (e) {
 
@@ -155,7 +157,7 @@ var Snake = cc.Layer.extend({
             startPoints: tmx.getObjectGroup('StartPoints').getObjects()
         });
 
-        this.background = cc.Sprite.create('Maps/Level_One.png');
+        this.background = cc.Sprite.create('Maps/Level_Four.png');
         this.background.setAnchorPoint(new cc.Point(0.0, 0.0));
         this.background.setPosition(new cc.Point(0.0, 0.0));
         this.addChild(this.background, 0);
@@ -245,7 +247,6 @@ var Snake = cc.Layer.extend({
 });
 
 Snake.layer = function () {
-    console.log('testing');
     var sg = new Snake();
     if (sg && sg.init()) {
         return sg;

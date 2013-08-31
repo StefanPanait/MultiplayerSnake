@@ -17,7 +17,6 @@
         appFiles:[
         'js/Snake.js',
         'js/Menu.js'
-
         ]//appFiles:['js/Snake.js']
     };
     window.addEventListener('DOMContentLoaded', function () {

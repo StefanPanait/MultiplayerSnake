@@ -69,7 +69,7 @@ cc.AnimationCache = cc.Class.extend(/** @lends cc.AnimationCache# */{
      * @return {cc.Animation}
      */
     getAnimation:function (name) {
-        if(this._animations.hasOwnProperty(name))
+        if (this._animations.hasOwnProperty(name))
             return this._animations[name];
         return null;
     },
@@ -119,10 +119,11 @@ cc.AnimationCache = cc.Class.extend(/** @lends cc.AnimationCache# */{
      * @param {String} plist
      */
     addAnimations:function (plist) {
-        cc.Assert(plist, "Invalid texture file name");
+        cc.Assert(plist, "Invalid texture file name")
+        var fileUtils = cc.FileUtils.getInstance();
 
-        var path = cc.FileUtils.getInstance().fullPathFromRelativePath(plist);
-        var dict = cc.FileUtils.getInstance().dictionaryWithContentsOfFileThreadSafe(path);
+        var path = fileUtils.fullPathForFilename(plist);
+        var dict = fileUtils.dictionaryWithContentsOfFileThreadSafe(path);
 
         cc.Assert(dict, "cc.AnimationCache: File could not be found");
 
@@ -173,7 +174,9 @@ cc.AnimationCache = cc.Class.extend(/** @lends cc.AnimationCache# */{
 
         for (var key in animations) {
             var animationDict = animations[key];
-            var loops = parseInt(animationDict["loops"]) || 1;
+
+            var loopsTemp = parseInt(animationDict["loops"]);
+            var loops = (isNaN(loopsTemp)) ? 1 : loopsTemp;
             var restoreOriginalFrame = (animationDict["restoreOriginalFrame"] && animationDict["restoreOriginalFrame"] == true) ? true : false;
             var frameArray = animationDict["frames"];
 

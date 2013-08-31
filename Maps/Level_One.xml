@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="24" height="40" tilewidth="32" tileheight="32">
- <tileset firstgid="49" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1">
+ <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <image source="tmw_desert_spacing.png" width="265" height="199"/>
  </tileset>
  <layer name="Tile Layer 1" width="24" height="40">
-  <data encoding="base64" compression="zlib">
-   eJzdljESACEIA6l9xD3J/z/n2hvHgYCBUws6XTEQsYlIS44nKar5kbtpa2Z8pgYMvnaGxrfyQs5g8rV6evVBaxrtT2uPh7/i09v8eysf6eud6suaDRZj9Mlq/49rq/Kv0ofdPxn5M/8Wu/h3Jz46Y0/le/8MIwf1BcqeMRF9kDdo5hOm/tbdNX4H8/fy+yciNUf4HpY2Z058H/7gZ8YL84BfFQ==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC92WMRIAIQgDrX3E/f+Z1zMOBAiKFnS6YiDiHGPM4viKYjc/cjdtzYrP1IDB187Q+FZeyBlMvlZPrz5oTaP9ae3x8DM+fc2/r/KRvu5UX9ZssBjSJ9n+l2t35b9LH3b/VOTP/Ft08W8nPjpjb+V7/wySg/oCZa+YiD7IG7TyCVN/6+6M/CP8TM2Z/WPNmRvfhxP8yvgBXVh+bAAPAAA=
   </data>
  </layer>
  <objectgroup name="StartPoints" width="24" height="40">
-  <object name="Start_One" x="32" y="32" width="32" height="32"/>
+  <object name="Start_One" x="64" y="64" width="32" height="32"/>
   <object name="Start_Two" x="672" y="1152" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="Points" width="24" height="40">
@@ -43,7 +43,6 @@
     <property name="points" value="10"/>
    </properties>
   </object>
-  <object x="869" y="748" width="4"/>
  </objectgroup>
  <objectgroup name="Walls" width="24" height="40">
   <object name="wall" x="96" y="96" width="32" height="192"/>
@@ -80,9 +79,12 @@
   <object name="wall" x="288" y="960" width="32" height="32"/>
   <object name="wall" x="192" y="992" width="32" height="32"/>
   <object name="wall" x="256" y="992" width="32" height="32"/>
+  <object name="wall" x="192" y="1056" width="32" height="32"/>
   <object name="wall" x="256" y="1056" width="32" height="32"/>
   <object name="wall" x="288" y="1088" width="32" height="32"/>
   <object name="wall" x="320" y="1120" width="32" height="32"/>
+  <object name="wall" x="160" y="1088" width="32" height="32"/>
+  <object name="wall" x="128" y="1120" width="32" height="32"/>
   <object name="wall" x="736" y="32" width="32" height="1280"/>
   <object name="wall" x="0" y="0" width="768" height="32"/>
   <object name="wall" x="0" y="32" width="32" height="1376"/>
