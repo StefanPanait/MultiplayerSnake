@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="24" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tile20" tilewidth="32" tileheight="32">
+  <image source="tile20.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="tile04-edited" tilewidth="32" tileheight="32">
+  <image source="tile04-edited.jpg" width="515" height="515"/>
+ </tileset>
+ <tileset firstgid="513" name="tile02" tilewidth="32" tileheight="32">
+  <image source="tile02.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="769" name="tile29" tilewidth="32" tileheight="32">
+  <image source="tile29.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1025" name="tile30" tilewidth="32" tileheight="32">
+  <image source="tile30.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1281" name="tile12" tilewidth="32" tileheight="32">
+  <image source="tile12.png" width="512" height="352"/>
+ </tileset>
+ <tileset firstgid="1457" name="tile31" tilewidth="32" tileheight="32">
+  <image source="tile31.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1713" name="tile35" tilewidth="32" tileheight="32">
+  <image source="tile35.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Background-04" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMA6C9f8wVWY+jYC+pqqqqPj+xbFcu
+  </data>
+ </layer>
+ <layer name="Outer Walls-04" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztztEJACAMA9G6/wLWCcQJtNOZJQKCF7jfR3qLSFNDTeXawsfHx8fHx8fHx8d/yt/qmCrjd/bHLqeZSmE=
+  </data>
+ </layer>
+ <layer name="Walls-02" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhcYBkTefqMgPqMgdiESP3LybQHGTyHmvGCCmaNglEwCoYXeDNaLowCKoFuGps/m8bmkwIuj+abYQX2A+PzwGicjoJRMAoGGQAAMBAIMA==
+  </data>
+ </layer>
+ <layer name="Walls-30" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJACAMBMF7WJkpMQ2LPzuQwEwFyyZz1PpdMMP9tJ9X7RsAAEAOBQEBbA==
+  </data>
+ </layer>
+ <layer name="Walls-31" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQxlIsNHWfA0c5vvhsTeMBDdZkOH+NBr4+Qcrgl2GZr46El8cyL7GykAy4CDSzVdxmL0TKL6LDHuRwRU8+k8C5U4RYf5EGqe3hVQyfzKN3bmYxuaPglEwEsFUIvJVMFBNCIX5bwoN8u93IsrPRgrsZYfq3UFhPUAInKCx+UMFVNOhjK/EYoc7le2tApq3Bxine4F432jcjoJRAAcA8gkUtQ==
+  </data>
+ </layer>
+ <layer name="Walls-12" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BggQLrQLtgFAwGYAZNBxaj6WFIg4ghHn+RA+h+wyEedqNgFIyCUTAKRsFQAABi3AGP
+  </data>
+ </layer>
+ <layer name="Walls-29" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENACAMA8FI2Y0RCPtPQnagCMWd5N7NR8CMldMP4H+7O6ne0QsAwLMLfCMBWA==
+  </data>
+ </layer>
+ <layer name="Walls-20" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4C64CqNzX9KY/O/0th8SsBMGpg5hQZmDjegSqF+XSDWA2I+ID6HJudAodkgYAvEdkAsB8SyaHIBVDCfUqCFQ9wXi9h3JgaGH0ykmW+FRSwOiGNJMwYn8ALiZizifjjUrwDiNii7DYcaSsAOIJ4GZU/DIr8QiR1FotlNRKjZSKKZpIKDFOidRDVXjIJRMApGwSgYrgAADC4SEg==
+  </data>
+ </layer>
+ <layer name="Walls-35" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQwnws9PWfF4amz8KRg6gZVq1Gk2no2AUjIJhBIyhZZoJjco2Z6i5LiSaPxOP+r1s5LuHGHAWzfwmKoTNKiqH7ywk87pwmL2YBnG6BGrmUiqZXQU0p3O0Xh0FIwgAANzOCUA=
+  </data>
+ </layer>
+ <objectgroup name="Walls" width="24" height="40">
+  <object x="0" y="0" width="768" height="32"/>
+  <object x="736" y="32" width="32" height="1056"/>
+  <object x="0" y="1056" width="768" height="32"/>
+  <object x="0" y="32" width="32" height="1024"/>
+  <object x="384" y="32" width="32" height="32"/>
+  <object x="448" y="64" width="32" height="32"/>
+  <object x="608" y="32" width="32" height="32"/>
+  <object x="672" y="128" width="64" height="32"/>
+  <object x="704" y="160" width="32" height="32"/>
+  <object x="512" y="128" width="32" height="96"/>
+  <object x="480" y="192" width="96" height="32"/>
+  <object x="384" y="128" width="32" height="64"/>
+  <object x="224" y="96" width="32" height="32"/>
+  <object x="288" y="96" width="32" height="32"/>
+  <object x="64" y="64" width="96" height="32"/>
+  <object x="32" y="160" width="32"/>
+  <object x="64" y="160" height="32"/>
+  <object x="32" y="160" width="32" height="32"/>
+  <object x="64" y="256" width="32" height="64"/>
+  <object x="160" y="192" width="32" height="96"/>
+  <object x="128" y="352" width="32" height="64"/>
+  <object x="96" y="384" width="96" height="32"/>
+  <object x="288" y="256" width="32" height="32"/>
+  <object x="384" y="256" width="64" height="32"/>
+  <object x="384" y="288" width="32" height="32"/>
+  <object x="352" y="320" width="32" height="32"/>
+  <object x="576" y="288" width="64" height="64"/>
+  <object x="544" y="320" width="32" height="32"/>
+  <object x="480" y="352" width="32" height="32"/>
+  <object x="448" y="384" width="32" height="32"/>
+  <object x="704" y="384" width="32" height="64"/>
+  <object x="576" y="416" width="32" height="32"/>
+  <object x="544" y="448" width="32" height="64"/>
+  <object x="320" y="448" width="128" height="64"/>
+  <object x="672" y="512" width="32" height="32"/>
+  <object x="672" y="576" width="32" height="32"/>
+  <object x="704" y="640" width="32" height="128"/>
+  <object x="640" y="704" width="64" height="32"/>
+  <object x="224" y="448" width="32" height="32"/>
+  <object x="32" y="480" width="96" height="32"/>
+  <object x="64" y="544" width="32" height="96"/>
+  <object x="96" y="608" width="32" height="32"/>
+  <object x="128" y="640" width="32" height="32"/>
+  <object x="224" y="576" width="64" height="32"/>
+  <object x="256" y="544" width="32" height="32"/>
+  <object x="416" y="544" width="64" height="32"/>
+  <object x="448" y="608" width="64" height="64"/>
+  <object x="544" y="608" width="32" height="64"/>
+  <object x="416" y="672" width="32" height="32"/>
+  <object x="256" y="608" width="32" height="32"/>
+  <object x="320" y="640" width="32" height="64"/>
+  <object x="32" y="672" width="32" height="32"/>
+  <object x="640" y="288" width="32" height="32"/>
+  <object x="608" y="768" width="32" height="64"/>
+  <object x="672" y="800" width="32" height="64"/>
+  <object x="544" y="864" width="64" height="32"/>
+  <object x="544" y="992" width="128" height="32"/>
+  <object x="672" y="960" width="32" height="32"/>
+  <object x="512" y="960" width="32" height="32"/>
+  <object x="480" y="928" width="32" height="32"/>
+  <object x="416" y="800" width="32" height="64"/>
+  <object x="352" y="800" width="32" height="64"/>
+  <object x="416" y="736" width="32" height="32"/>
+  <object x="160" y="736" width="64" height="32"/>
+  <object x="128" y="800" width="32" height="32"/>
+  <object x="256" y="864" width="32" height="64"/>
+  <object x="384" y="896" width="32" height="32"/>
+  <object x="320" y="960" width="32" height="32"/>
+  <object x="288" y="992" width="32" height="32"/>
+  <object x="224" y="992" width="32" height="32"/>
+  <object x="160" y="928" width="32" height="32"/>
+  <object x="128" y="960" width="32" height="32"/>
+  <object x="96" y="1024" width="64" height="32"/>
+  <object x="32" y="960" width="32" height="32"/>
+  <object x="32" y="864" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="StartPoints" width="24" height="40">
+  <object x="32" y="32" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="Points" width="24" height="40">
+  <object x="704" y="32" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="256" y="96" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="416" y="32" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="352" y="288" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="64" y="512" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="416" y="512" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="512" y="640" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="672" y="544" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="672" y="768" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="672" y="992" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="32" y="1024" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="256" y="992" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="32" y="832" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="384" y="800" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="544" y="960" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="96" y="352" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+  <object x="640" y="320" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="544" y="160" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="128" y="608" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="increase"/>
+    <property name="time" value="5"/>
+   </properties>
+  </object>
+  <object x="256" y="416" width="32" height="32">
+   <properties>
+    <property name="points" value="25"/>
+    <property name="speed" value="decrease"/>
+    <property name="time" value="10"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

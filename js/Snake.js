@@ -19,6 +19,8 @@ var Snake = cc.Layer.extend({
     background: null,
     player: null,
     points: null,
+    score: null,
+    label_Score: null,
 
     init:function()
     {
@@ -27,17 +29,22 @@ var Snake = cc.Layer.extend({
         this._super();
 
         this.setKeyboardEnabled(true);
-    console.log('testing1');
-        tmx = cc.TMXTiledMap.create('Maps/Level_Four.tmx');
-            console.log('testing2');
+        console.log('testing1');
+        tmx = cc.TMXTiledMap.create('Maps/Level_Five.tmx');
+        console.log('testing2');
+
+
         this.physics = new Worker('js/Box2dWebWorker.js');
         this.physics.addEventListener('message', function (e) {
-
             if (e.data.msg === 'remove') { //remove point from map
+                //update score
+                _g.snake.score += +_g.snake.points.sprites[e.data.index].points;
+                _g.snake.label_Score.setString("Score: "+_g.snake.score);
                 _g.snake.removeChild(_g.snake.points.sprites[e.data.index]);
                 _g.snake.points.sprites[e.data.index] = null;
+
                 var newLocation = NewBodyLocation();
-                _g.snake.player.body.push(cc.Sprite.create('Maps/tmw_desert_spacing.png', new cc.Rect(224+8, 160+6, 32.0, 32.0)));
+                _g.snake.player.body.push(cc.Sprite.create('images/snakebody.png'));
                 _g.snake.player.body[_g.snake.player.body.length-1].setPosition(
                     new cc.Point(
                         newLocation.x,
@@ -49,7 +56,6 @@ var Snake = cc.Layer.extend({
                 _g.snake.player.body[_g.snake.player.body.length-1].movement.push({axis:newLocation.axis,amount:newLocation.amount});
                 _g.snake.player.bodyLocations.push({x:newLocation.x,y:newLocation.y});
                 _g.snake.player.newSpeed = 4;
-                console.log('pushing new body');
             } else if (e.data.msg === 'no prob') {
                 _g.snake.player.cx = _g.snake.player.nx;
                 _g.snake.player.cy = _g.snake.player.ny;
@@ -157,7 +163,7 @@ var Snake = cc.Layer.extend({
             startPoints: tmx.getObjectGroup('StartPoints').getObjects()
         });
 
-        this.background = cc.Sprite.create('Maps/Level_Four.png');
+        this.background = cc.Sprite.create('Maps/Level_Five.png');
         this.background.setAnchorPoint(new cc.Point(0.0, 0.0));
         this.background.setPosition(new cc.Point(0.0, 0.0));
         this.addChild(this.background, 0);
@@ -183,8 +189,9 @@ var Snake = cc.Layer.extend({
         this.points = tmx.getObjectGroup('Points').getObjects();
         this.points.sprites = [];
         for (n = 0; n < this.points.length; n = n + 1) {
-
-            this.points.sprites.push(cc.Sprite.create('Maps/tmw_desert_spacing.png', new cc.Rect(224+8, 160+6, 32.0, 32.0)));
+            var sprite = cc.Sprite.create('images/rabbit_points_01.png');
+            sprite.points = this.points[n].points;
+            this.points.sprites.push(sprite);
             this.points.sprites[n].setPosition(
                 new cc.Point(
                     this.points[n].x + this.points[n].width / 2.0,
@@ -195,8 +202,33 @@ var Snake = cc.Layer.extend({
         }
         this.points.sprites.count = this.points.sprites.length;
 
+        /* Display Score */
+        this.label_Score = cc.LabelTTF.create("Score: 0", "Arial", 30);
+        this.label_Score.setPosition(new cc.Point(window.innerWidth*.1,window.innerHeight*.1));
+        this.label_Score.setColor(new cc.Color3B(255,0,0));
+        this.label_Score.setString("testing");
+        this.addChild(this.label_Score);
 
         this.schedule(this.update);
+
+        /* Controls */
+        var btn_up = new cc.MenuItemImage.create('images/btn_up.png','images/btn_up.png', this.MoveUp, this);
+        btn_up.setPosition(new cc.Point(window.innerWidth*.5,window.innerHeight*.12));
+
+        var btn_down = new cc.MenuItemImage.create('images/btn_down.png','images/btn_down.png', this.MoveDown, this);
+        btn_down.setPosition(new cc.Point(window.innerWidth*.5,window.innerHeight*.04));
+
+        var btn_left = new cc.MenuItemImage.create('images/btn_left.png','images/btn_left.png', this.MoveLeft, this);
+        btn_left.setPosition(new cc.Point(window.innerWidth*.35,window.innerHeight*.09));
+
+        var btn_right = new cc.MenuItemImage.create('images/btn_right.png','images/btn_right.png', this.MoveRight, this);
+        btn_right.setPosition(new cc.Point(window.innerWidth*.65,window.innerHeight*.085));
+
+        var menu = cc.Menu.create(btn_up,btn_down,btn_left,btn_right);
+        menu.setPosition(new cc.Point(0,0));
+        this.addChild(menu,2);
+
+
 
 
         return true;
@@ -242,6 +274,18 @@ var Snake = cc.Layer.extend({
             body: this.player.bodyLocations,
             direction: this.player.cdirection
         });
+    },
+    MoveUp: function () {
+        _g.snake.player.ndirection = 3;
+    },
+    MoveDown: function () {
+        _g.snake.player.ndirection = 4;
+    },
+    MoveLeft: function () {
+        _g.snake.player.ndirection = 1;
+    },
+    MoveRight: function () {
+        _g.snake.player.ndirection = 2;
     }
 
 });
