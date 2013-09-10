@@ -37,40 +37,65 @@ var ccApplication = cc.Application.extend({
             {src: 'Maps/tile13.png'},
             {src: 'Maps/tile21.png'},
             {src: 'Maps/tile17.png'},
-            {src: 'Maps/tmw_desert_spacing.png'},
         //controls
-            {src: 'images/btn_play.png'},
             {src: 'images/btn_up.png'},
             {src: 'images/btn_down.png'},
             {src: 'images/btn_left.png'},
             {src: 'images/btn_right.png'},
-
         //snake
             {src: 'images/snakebody.png'},
-
+            {src: 'images/snakehead.png'},
         //points
             {src: 'images/rabbit_points_01.png'},
-
         //main menu
+            {src: 'images/btn_startgame.png'},
+            {src: 'images/btn_pressed_startgame.png'},
             {src: 'images/btn_howtoplay.png'},
             {src: 'images/btn_highscore.png'},
             {src: 'images/menubackground.png'},
-
+            {src: 'images/btn_share.png'},
+            {src: 'images/btn_pressed_share.png'},
+        //mapselection
+            {src: 'images/mapselection.png'},
+            {src: 'images/elegantmansionthumb.png'},
+            {src: 'images/btn_mansion.png'},
+            {src: 'images/btn_pressed_mansion.png'},
+            {src: 'images/crystalcavethumb.png'},
+            {src: 'images/btn_caverns.png'},
+            {src: 'images/btn_pressed_caverns.png'},
+            {src: 'images/tropicalforestthumb.png'},
+            {src: 'images/btn_back.png'},
+            {src: 'images/btn_pressed_back.png'},
         //maps
-            {src: 'Maps/Level_One.tmx'},
-            {src: 'Maps/Level_One.png'},
-            {src: 'Maps/Level_Four.tmx'},
-            {src: 'Maps/Level_Four.png'},
-            {src: 'Maps/Level_Five.tmx'},
-            {src: 'Maps/Level_Five.png'},
-            {src: 'Maps/Level_Two.tmx'}
-
-
+            {src: 'Maps/elegantmansion.tmx'},
+            {src: 'Maps/elegantmansion.png'},
+            {src: 'Maps/crystalcave.tmx'},
+            {src: 'Maps/crystalcave.png'},
+            {src: 'Maps/pyramid.png'},
+            {src: 'Maps/pyramid.tmx'},
+        //snake
+            {src: 'images/btn_pressed_continue.png'},
+            {src: 'images/btn_continue.png'},
+            {src: 'images/layer_gameover.png'},
+            {src: 'images/btn_menu.png'},
+            {src: 'images/btn_pressed_menu.png'},
+            {src: 'images/btn_resume.png'},
+            {src: 'images/btn_pressed_resume.png'},
+            {src: 'images/btn_quit.png'},
+            {src: 'images/btn_pressed_quit.png'},
+        //sounds
+            {src: 'sound/The Complex.mp3'},
+            {src: 'images/btn_on_sound.png'},
+            {src: 'images/btn_off_sound.png'},
+            {src: 'sound/menubutton.wav'},
+            {src: 'sound/point.mp3'},
             ];
 
         cc.Loader.preload(resources, function () {
             cc.Director.getInstance().runWithScene(new this.startScene());
         }, this);
+
+        cc.AudioEngine.getInstance().init("mp3,ogg,wav");
 
         return true;
     }

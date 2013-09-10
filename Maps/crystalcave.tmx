@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="24" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tile21" tilewidth="32" tileheight="32">
+  <image source="tile21.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="tile13" tilewidth="32" tileheight="32">
+  <image source="tile13.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="tile04-edited" tilewidth="32" tileheight="32">
+  <image source="tile04-edited.jpg" width="515" height="515"/>
+ </tileset>
+ <layer name="background" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHrH+8TrcdQcNVUVVX1+QPQdxOu
+  </data>
+ </layer>
+ <layer name="tile21" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlz8OQUEQxqdxBAeg0vqX6EVDreEMRKMSouE0SqXSCdyCG1AZYZPNmJn99qEzyVe83dnfzM7uvJfXJKLWj9Rm9QizkzF+Zl2MuZ7CPznS7Mq6ZfDRGEgOFj8VA9mXxc/heuyifOmTw5escDcsFsq38vPuRuxXlI/kqK1B+UidvXmNj5yj54/yrfwXxvxE8c/JP2iqxKyxlgX5OxFrxZqLOnReYxa/5NTjIMbnijasrVgX88uJ+pB4lmOWxf2r3YPUWaP95fnulNheT+XyD8o42nspvrf+E76XH9KDwU97P3t8tMfDs5Z/qiZeLOmHnK9lyF4+4Xuxgn2D79VJ8vcJfyRWbJJ/jJh91iAzhpW/luuINRbrkD1p5yvfa0ieKX58/yusKj2/Q0X5M4dfZzXo+R1K3WtLa3qv3YPdpd/9XwzBevztb5bdASzjLtc=
+  </data>
+ </layer>
+ <layer name="tile13" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1DdIBEEAheG70mxrtjXbmm3NtmZbc6pUMGClgtqYY2lnFnNWzGDOFoI5gIKCEf/jEI6DlRXnioN98MEwO/uYjSqV8SVPrWWolKm19NPDXC/60I8BDP5xHzmsz5U4Z5r5GcxiDvNYEHidG3RtYgvb2MGuwP5Sus6wh32c40Kn34SxKcxgDgtYwgrWMvbxyJonXOIKz3jROc+GsS3sYA8HOMIJzgKu04UOV7jBHR7whBe8BfT70OELP/gjAIEIQvAv/bUcq0M9GtApsTaE+VCEIRwRiEQUomXuX9M9JLE2hvlYxCEeCUhEEpJl9mu6FyXWpjCfijSkIwOZyEK2zH5Nt/79+kk+4wIUogvdKEIxSgQ833I6KlCJSUyhCtWoEdDfSEcTmtGCVrShHR0G/F8q+V/030ep91OJEiXaDPNdjGAUYxjHhMBvZYmuZaxgFWtYF9h/QNchjnCME5wK7L+m6wa3uMM9HgT2v9L1hnd84BNfyr9KiZHlG9aLXlY=
+  </data>
+ </layer>
+ <layer name="tiel04-edited" width="24" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGASVgBhMDw0wkDAPIYrOYcOsnBFYQoXcVFczfBKRXQtkroezNTPjNvwcUPw/ED4iwfyWS+cQCmPl7yfAfMfaBzL9PwP2w8DnEhGomiD5MIHzeAcXfA/EHIszHB3CZ/w8o/h8kx4xb7w6g/E4CeBcO829Dxe9SkL7wgddQc9/SyPxRMApGwShABwB9eis0
+  </data>
+ </layer>
+ <objectgroup name="Walls" width="24" height="40">
+  <object x="0" y="0" width="768" height="32"/>
+  <object x="0" y="32" width="32" height="1056"/>
+  <object x="736" y="32" width="32" height="1056"/>
+  <object x="32" y="1056" width="704" height="32"/>
+  <object x="512" y="32" width="64" height="64"/>
+  <object x="672" y="32" width="64" height="64"/>
+  <object x="640" y="96" width="64" height="32"/>
+  <object x="384" y="192" width="192" height="320"/>
+  <object x="576" y="256" width="32" height="256"/>
+  <object x="352" y="256" width="32" height="224"/>
+  <object x="32" y="320" width="160" height="32"/>
+  <object x="128" y="352" width="64" height="96"/>
+  <object x="192" y="416" width="96" height="32"/>
+  <object x="256" y="448" width="32" height="64"/>
+  <object x="256" y="576" width="32" height="64"/>
+  <object x="32" y="640" width="256" height="32"/>
+  <object x="32" y="480" width="32" height="64"/>
+  <object x="128" y="96" width="128" height="160"/>
+  <object x="256" y="128" width="32" height="64"/>
+  <object x="256" y="224" width="32" height="64"/>
+  <object x="224" y="256" width="32" height="32"/>
+  <object x="256" y="192" width="32" height="32"/>
+  <object x="96" y="128" width="32" height="96"/>
+  <object x="192" y="896" width="64" height="64"/>
+  <object x="480" y="896" width="128" height="160"/>
+  <object x="608" y="928" width="32" height="64"/>
+  <object x="448" y="928" width="32" height="96"/>
+  <object x="32" y="992" width="96" height="64"/>
+  <object x="64" y="704" width="96" height="224"/>
+  <object x="352" y="608" width="128" height="32"/>
+  <object x="544" y="608" width="128" height="32"/>
+  <object x="640" y="640" width="32" height="64"/>
+  <object x="416" y="672" width="64" height="64"/>
+  <object x="544" y="736" width="64" height="64"/>
+  <object x="512" y="672" width="96" height="32"/>
+  <object x="416" y="768" width="96" height="32"/>
+  <object x="352" y="768" width="32" height="96"/>
+  <object x="384" y="832" width="288" height="32"/>
+  <object x="640" y="768" width="32" height="64"/>
+  <object x="352" y="640" width="32" height="64"/>
+ </objectgroup>
+ <objectgroup name="StartPoints" width="24" height="40">
+  <object x="32" y="32" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="Points" width="24" height="40">
+  <object x="480" y="736" width="32" height="32">
+   <properties>
+    <property name="points" value="30"/>
+   </properties>
+  </object>
+  <object x="512" y="704" width="32" height="32">
+   <properties>
+    <property name="points" value="30"/>
+   </properties>
+  </object>
+  <object x="384" y="640" width="32" height="32">
+   <properties>
+    <property name="points" value="20"/>
+   </properties>
+  </object>
+  <object x="384" y="800" width="32" height="32">
+   <properties>
+    <property name="points" value="20"/>
+   </properties>
+  </object>
+  <object x="608" y="800" width="32" height="32">
+   <properties>
+    <property name="points" value="20"/>
+   </properties>
+  </object>
+  <object x="608" y="640" width="32" height="32">
+   <properties>
+    <property name="points" value="20"/>
+   </properties>
+  </object>
+  <object x="704" y="96" width="32" height="32">
+   <properties>
+    <property name="points" value="50"/>
+    <property name="removebody" value="0"/>
+    <property name="speed" value="increment"/>
+   </properties>
+  </object>
+  <object x="640" y="64" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="576" y="32" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increase"/>
+   </properties>
+  </object>
+  <object x="64" y="384" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="32" y="544" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="224" y="608" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="608" y="1024" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increment"/>
+   </properties>
+  </object>
+  <object x="640" y="224" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increase"/>
+   </properties>
+  </object>
+  <object x="672" y="320" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="640" y="416" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="672" y="512" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="672" y="960" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increment"/>
+   </properties>
+  </object>
+  <object x="224" y="768" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="32" y="672" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increase"/>
+   </properties>
+  </object>
+  <object x="160" y="896" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="224" y="992" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="320" y="928" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+  <object x="128" y="512" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+    <property name="speed" value="increment"/>
+   </properties>
+  </object>
+  <object x="32" y="608" width="32" height="32">
+   <properties>
+    <property name="points" value="10"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

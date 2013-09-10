@@ -11,12 +11,15 @@
         COCOS2D_DEBUG:2, //0 to turn debug off, 1 for basic debug, and 2 for full debug
         box2d:false,
         showFPS:false,
-        frameRate:60,
+        frameRate:30,
         tag:'gameCanvas', //the dom element to run cocos2d on
         engineDir:'cocos/cocos2d/',
         appFiles:[
+        'js/GameSettings.js',
         'js/Snake.js',
-        'js/Menu.js'
+        'js/MapSelection.js',
+        'js/Menu.js',
+        'js/lib/Freewill.js'
         ]//appFiles:['js/Snake.js']
     };
     window.addEventListener('DOMContentLoaded', function () {

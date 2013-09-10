@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <widget xmlns="http://www.w3.org/ns/widgets" 
     xmlns:rim="http://www.blackberry.com/ns/widgets"
-    version="1.0.0.0" id="Snake">   
+    version="1.0.0.0" id="Wild Feast">   
  
-    <name>Snake</name> 
-    <author>Sky Penguins</author>
-    <description>Money Transfer app</description>
+    <name>Wild Feast</name> 
+    <author>Stefan Panait</author>
+    <description>Classic Snake With Modern Features</description>
+
+
+    <rim:permissions>
+		<rim:permit>bbm_connect</rim:permit>
+	</rim:permissions>
 
 	<!-- icon that represents the application on the Home screen of the BlackBerry device -->
-
+	<icon src="images/app_icon.png"/>
 
     <content rim:allowInvokeParams="true" src="index.html" />
 
@@ -22,29 +27,11 @@
 		<param name="mode" value="portrait" />
 	</feature>
 	
-	<access uri="http://virtualearth.net" subdomains="true" />
-    <access uri="http://bing.net" subdomains="true" />
-	
-	<access subdomains="true" uri="*"/>
-	<access subdomains="true" uri="http://gstatic.com"/>
-	<access subdomains="true" uri="http://google.com"/>
-	<access subdomains="true" uri="http://googleapis.com"/>
-
-	<rim:permissions>  
-        <rim:permit>read_geolocation</rim:permit>
-    </rim:permissions>
-	<rim:invoke-target id="com.skypenguins.rbcngi">
-		<type>APPLICATION</type>
-		<filter>
-			<action>bb.action.OPEN</action>
-			<mime-type>application/vnd.rim.nfc.ndef</mime-type>
-			<property value="ndef://1,ndef://2,ndef://4" var="uris" />
-		</filter>
-	</rim:invoke-target>
 
 	<feature id="blackberry.ui.toast" />
 	    <access uri="*" subdomains="true" />
 	    <feature id="blackberry.app.orientation">
 	    <param name="mode" value="portrait" />
     </feature> 
+    <feature id="blackberry.bbm.platform" />
 </widget>
