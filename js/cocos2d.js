@@ -19,7 +19,8 @@
         'js/Snake.js',
         'js/MapSelection.js',
         'js/Menu.js',
-        'js/lib/Freewill.js'
+        'js/lib/Freewill.js',
+        'js/lib/spin.js'
         ]//appFiles:['js/Snake.js']
     };
     window.addEventListener('DOMContentLoaded', function () {

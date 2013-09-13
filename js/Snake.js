@@ -3,7 +3,6 @@ var _g = {
 };
 
 var Snake = cc.Layer.extend({
-    freewill: null,
     physics: null,
     background: null,
     player: null,
@@ -15,6 +14,8 @@ var Snake = cc.Layer.extend({
     collision_Timer: 0,
     fps: 30,
     menuLayer:null,
+    menuLayerExists: false,
+    schedulerSetup: false,
 
     init:function()
     {
@@ -26,6 +27,9 @@ var Snake = cc.Layer.extend({
         this.physics = new Worker('js/Box2dWebWorker.js');
         this.physics.addEventListener('message', function (e) {
             if (e.data.msg === 'remove') { //remove point from map
+                if(GameSettings.sound) {
+                    cc.AudioEngine.getInstance().playEffect('sound/point.mp3');
+                }
                 //update score
                 _g.snake.score += +_g.snake.points.sprites[e.data.index].points * _g.snake.player.body.length;
                 _g.snake.label_Score.setString("Score: "+_g.snake.score);
@@ -222,8 +226,7 @@ var Snake = cc.Layer.extend({
         this.label_Timer.setColor(new cc.Color3B(84,84,84));
         this.addChild(this.label_Timer);
 
-        /* Setup Schedule */
-        this.schedule(this.update);
+
 
         /* Controls */
         var btn_up = new cc.MenuItemImage.create('images/btn_up.png','images/btn_up.png', this.MoveUp, this);
@@ -241,43 +244,49 @@ var Snake = cc.Layer.extend({
         var menu = new cc.MenuItemImage.create('images/btn_menu.png','images/btn_pressed_menu.png', this.OpenMenu, this);
         menu.setPosition(new cc.Point(window.innerWidth*.85,window.innerHeight*.03));
 
-        var menu = cc.Menu.create(btn_up,btn_down,btn_left,btn_right,menu);
+        var menu = cc.Menu.create(menu);
         menu.setPosition(new cc.Point(0,0));
-        //this.addChild(menu,2);
+        this.addChild(menu,2);
 
-        /*Setup Gestures */
-        var controls = document.getElementById("freewill");
-        controls.style.visibility="visible";
+      
 
-        this.freewill = new Freewill({
-            container: controls  
-        });
- 
-        var joystick = this.freewill.move = this.freewill.addJoystick({
-            imageBase: 'images/freewill/dpad.png',
-            imagePad: 'images/freewill/pad.png',
-            fixed: true,
-            pos: [window.innerWidth*.4,window.innerHeight*.86],
-            opacLow: 80.0
-        });
+        //create new layer
+        this.menuLayer = cc.Layer.create();
 
-        this.freewill.move.onTouchMove = function () {
-            if (this.direction === 0) {
-                _g.snake.player.ndirection = 1;
-            }
-            if (this.direction === 4) {
-                _g.snake.player.ndirection = 2;
-            }
-            if (this.direction === 2) {
-                _g.snake.player.ndirection = 4;
-            }
-            if (this.direction === 6) {
-                _g.snake.player.ndirection = 3;
-            }
-        };
-        
+        var menuBackground = cc.Sprite.create('images/layer_gameover.png');
+        menuBackground.setPosition(window.innerWidth*.5,window.innerHeight*.5);
+        this.menuLayer.addChild(menuBackground);
 
+        var btn_Resume = new cc.MenuItemImage.create('images/btn_resume.png','images/btn_pressed_resume.png', this.Resume, this);
+        btn_Resume.setPosition(new cc.Point(window.innerWidth*.5,window.innerHeight*.45));
 
+        var label_Goal = cc.LabelTTF.create("GOAL is 1000 points!", "Arial", 30);
+        label_Goal.setPosition(new cc.Point(window.innerWidth*.5,window.innerHeight*.5));
+        label_Goal.setColor(new cc.Color3B(165,42,42));
+        this.menuLayer.addChild(label_Goal);
+
+        var offbutton = cc.MenuItemImage.create("images/btn_off_sound.png");
+        var onbutton = cc.MenuItemImage.create("images/btn_on_sound.png");
+        if (GameSettings.sound) {
+            var toggler = new cc.MenuItemToggle.create(onbutton);
+            toggler.addSubItem(offbutton);
+        } else {
+            var toggler = new cc.MenuItemToggle.create(offbutton);
+            toggler.addSubItem(onbutton);
+        }
+
+        toggler.setTarget(this.ToggleSound, this);
+        toggler.setPosition(new cc.Point(window.innerWidth*.75  ,window.innerHeight*.45));
+
+        var layerMenu = cc.Menu.create(btn_Resume,toggler);
+        layerMenu.setPosition(new cc.Point(0,0));
+
+        this.menuLayer.addChild(layerMenu);
+
+        this.addChild(this.menuLayer,3);
+        this.menuLayerExists = true;
+        GameSettings.running=true;
+        _spinner.stop();
         return true;
     },
     onKeyDown: function (e) {
@@ -308,7 +317,7 @@ var Snake = cc.Layer.extend({
     if (this.collision_Timer===GameSettings.fps) {
         GameOverLayer();
     }
-    this.collision_Timer ++;
+    //this.collision_Timer ++; 
 
     //direction
     if (((this.player.cx-16)%32===0) &&((this.player.cy-16)%32===0)) {
@@ -358,8 +367,15 @@ var Snake = cc.Layer.extend({
     OpenMenu: function () {
         //pause game
         _g.snake.pauseSchedulerAndActions();
+
+        if (_g.snake.menuLayerExists) {
+            _g.snake.removeChild(_g.snake.menuLayer);
+        }
+        var controls = document.getElementById("freewill");
+        controls.style.visibility="hidden";
         //create new layer
         _g.snake.menuLayer = cc.Layer.create();
+
         var menuBackground = cc.Sprite.create('images/layer_gameover.png');
         menuBackground.setPosition(window.innerWidth*.5,window.innerHeight*.5);
         _g.snake.menuLayer.addChild(menuBackground);
@@ -370,23 +386,54 @@ var Snake = cc.Layer.extend({
         var btn_quit = new cc.MenuItemImage.create('images/btn_quit.png','images/btn_pressed_quit.png', this.Quit, this);
         btn_quit.setPosition(new cc.Point(window.innerWidth*.5,window.innerHeight*.45));
 
-        var menu = cc.Menu.create(btn_Resume,btn_quit);
+        var offbutton = cc.MenuItemImage.create("images/btn_off_sound.png");
+        var onbutton = cc.MenuItemImage.create("images/btn_on_sound.png");
+        if (GameSettings.sound) {
+            var toggler = new cc.MenuItemToggle.create(onbutton);
+            toggler.addSubItem(offbutton);
+        } else {
+            var toggler = new cc.MenuItemToggle.create(offbutton);
+            toggler.addSubItem(onbutton);
+        }
+
+        toggler.setTarget(this.ToggleSound, this);
+        toggler.setPosition(new cc.Point(window.innerWidth*.75  ,window.innerHeight*.45));
+
+        var menu = cc.Menu.create(btn_Resume,btn_quit,toggler);
         menu.setPosition(new cc.Point(0,0));
         _g.snake.menuLayer.addChild(menu);
 
 
         _g.snake.addChild(_g.snake.menuLayer,3);
+        _g.snake.menuLayerExists = true;
         },
     Resume: function () {
         _g.snake.removeChild(_g.snake.menuLayer);
-        _g.snake.resumeSchedulerAndActions();
+        _g.snake.menuLayerExists = false;
+        var controls = document.getElementById("freewill");
+        controls.style.visibility="visible";
+        if (_g.snake.schedulerSetup===false) {
+            /* Setup Schedule */
+            _g.snake.schedule(_g.snake.update);
+            _g.snake.schedulerSetup=true;
+        } else {
+            _g.snake.resumeSchedulerAndActions();
+        }
+        
     },
     Quit: function () {
         var scene = cc.Scene.create();
         var menuLayer = Menu.layer();
         scene.addChild(menuLayer);
+        GameSettings.running=false;
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
-    }
+    },
+    ToggleSound: function () {
+        GameSettings.ToggleSound();
+    },
+    OpenGoalScreen: function () {   //pause game
+      
+        },
 
 });
 

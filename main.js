@@ -1,3 +1,4 @@
+var activityIndicator;
 var ccApplication = cc.Application.extend({
     config:document['ccConfig'],
     ctor:function (scene) {
@@ -71,6 +72,8 @@ var ccApplication = cc.Application.extend({
             {src: 'Maps/elegantmansion.png'},
             {src: 'Maps/crystalcave.tmx'},
             {src: 'Maps/crystalcave.png'},
+            {src: 'Maps/pyramid.png'},
+            {src: 'Maps/pyramid.tmx'},
         //snake
             {src: 'images/btn_pressed_continue.png'},
             {src: 'images/btn_continue.png'},
@@ -81,13 +84,89 @@ var ccApplication = cc.Application.extend({
             {src: 'images/btn_pressed_resume.png'},
             {src: 'images/btn_quit.png'},
             {src: 'images/btn_pressed_quit.png'},
+        //sounds
+            {src: 'sound/The Complex.mp3'},
+            {src: 'images/btn_on_sound.png'},
+            {src: 'images/btn_off_sound.png'},
+            {src: 'sound/menubutton.wav'},
+            {src: 'sound/point.mp3'},
             ];
 
         cc.Loader.preload(resources, function () {
             cc.Director.getInstance().runWithScene(new this.startScene());
         }, this);
 
+        cc.AudioEngine.getInstance().init("mp3,ogg,wav");
+
+        console.log("adding back/fore listeners");
+        blackberry.event.addEventListener("pause", onPause);
+        blackberry.event.addEventListener("resume", onResume);
+        blackberry.event.addEventListener("swipedown", onSwipeDown);
+
+        var controls = document.getElementById("freewill");
+        controls.style.visibility="hidden";
+        /*Setup Gestures */
+        var freewill = new Freewill({
+                container: controls  
+            });
+     
+        var joystick = freewill.move = freewill.addJoystick({
+            imageBase: 'images/freewill/dpad.png',
+            imagePad: 'images/freewill/pad.png',
+            fixed: true,
+            pos: [window.innerWidth*.5 - 80,window.innerHeight*.5 - (5*32)],
+            trigger: [0.0, 0.0, window.innerWidth, window.innerHeight],
+            opacLow: 0.0,
+            opacHigh: 0.0
+        });
+
+        freewill.move.onTouchStart = function (touch, point) {
+            GameSettings.touchX = point[0];
+            GameSettings.touchY = point[1];
+            GameSettings.touchStarted=true;
+        }
+
+        freewill.move.onTouchMove = function (touch, point) {
+            if (GameSettings.touchStarted) {
+                if ((GameSettings.touchY - point[1]) < (-50)) {
+                    _g.snake.player.ndirection = 4;
+                    GameSettings.touchStarted = false;
+                } else if (GameSettings.touchY- point[1] > 50) {
+                    _g.snake.player.ndirection = 3;
+                    GameSettings.touchStarted = false;
+                } else if (GameSettings.touchX - point[0] > 50) {
+                    _g.snake.player.ndirection = 1;
+                    GameSettings.touchStarted = false;
+                } else if (GameSettings.touchX - point[0] < -50) {
+                    _g.snake.player.ndirection = 2;
+                    GameSettings.touchStarted = false;
+                }
+            }
+        };
+
+
         return true;
     }
 });
 var myApp = new ccApplication(Menu.scene);
+
+function onPause () {
+    if (GameSettings.sound===true) {
+        cc.AudioEngine.getInstance().pauseAllEffects();
+        cc.AudioEngine.getInstance().pauseMusic();
+    }
+    if (GameSettings.running) {
+        _g.snake.OpenMenu();
+    }
+}
+
+function onResume () {
+    if (GameSettings.sound===true) {
+        cc.AudioEngine.getInstance().resumeAllEffects();
+        cc.AudioEngine.getInstance().resumeMusic();
+    }
+}
+
+function onSwipeDown () {
+    console.log("swiped down");
+}
