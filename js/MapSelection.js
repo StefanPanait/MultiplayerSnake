@@ -29,6 +29,7 @@ var MapSelection = cc.Layer.extend({
         menu.setPosition(new cc.Point(0,0));
 
         this.addChild(menu,0);
+        GameSettings.currentScene = this;
         return true;
     },
     Back: function () {

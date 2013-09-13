@@ -46,6 +46,8 @@ var ccApplication = cc.Application.extend({
         //snake
             {src: 'images/snakebody.png'},
             {src: 'images/snakehead.png'},
+            {src: 'images/btn_play.png'},
+            {src: 'images/btn_pressed_play.png'},
         //points
             {src: 'images/rabbit_points_01.png'},
         //main menu
@@ -56,6 +58,7 @@ var ccApplication = cc.Application.extend({
             {src: 'images/menubackground.png'},
             {src: 'images/btn_share.png'},
             {src: 'images/btn_pressed_share.png'},
+            {src: 'images/layer_menu.png'},
         //mapselection
             {src: 'images/mapselection.png'},
             {src: 'images/elegantmansionthumb.png'},
@@ -168,5 +171,5 @@ function onResume () {
 }
 
 function onSwipeDown () {
-    console.log("swiped down");
+    GameSettings.OpenMenu();
 }

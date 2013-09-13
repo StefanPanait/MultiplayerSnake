@@ -43,7 +43,7 @@ self.init = function (objects) {
         fixtureDef.shape.SetAsBox((object.width) / 2.0 / self.world.scale, (object.height) / 2.0 / self.world.scale);
         object = self.world.CreateBody(bodyDef).CreateFixture(fixtureDef).SetUserData({
             tagName: 'point',
-            index: n
+            index: object.x+","+object.y
         });
     }
 
@@ -186,6 +186,10 @@ self.addEventListener('message', function (e) {
             break;
         }
 
+        if(e.data.pointToAdd) {
+            AddPoint(e.data.pointToAdd);
+        }
+
         self.world.Step(
             0.0167, /* Frame rate based on milliseconds. */
             20, /* Velocity iterations. */
@@ -225,4 +229,24 @@ function CreatePlayerBody(x, y) {
         index: 1
     });
     return body;
+}
+
+function AddPoint(point) {
+    var x = parseInt(point.split(",")[0]);
+    var y = parseInt(point.split(",")[1]);
+
+    var fixtureDef = new Box2D.Dynamics.b2FixtureDef();
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.0;
+    fixtureDef.restitution = 0.0;
+    var bodyDef = new Box2D.Dynamics.b2BodyDef();
+    bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody;
+    bodyDef.position.x = (x + 16) / self.world.scale;
+    bodyDef.position.y = -(y + 16 / 2.0) / self.world.scale;
+    fixtureDef.shape = new Box2D.Collision.Shapes.b2PolygonShape();
+    fixtureDef.shape.SetAsBox((32) / 2.0 / self.world.scale, (32) / 2.0 / self.world.scale);
+    object = self.world.CreateBody(bodyDef).CreateFixture(fixtureDef).SetUserData({
+        tagName: 'point',
+        index: x+","+y
+    });
 }

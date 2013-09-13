@@ -11,20 +11,7 @@ var Menu = cc.Layer.extend({
         var share = new cc.MenuItemImage.create('images/btn_share.png','images/btn_pressed_share.png', this.Share, this);
         share.setPosition(new cc.Point(window.innerWidth*.69,window.innerHeight*.53));
 
-        var offbutton = cc.MenuItemImage.create("images/btn_off_sound.png");
-        var onbutton = cc.MenuItemImage.create("images/btn_on_sound.png");
-        if (GameSettings.sound) {
-            var toggler = new cc.MenuItemToggle.create(onbutton);
-            toggler.addSubItem(offbutton);
-        } else {
-            var toggler = new cc.MenuItemToggle.create(offbutton);
-            toggler.addSubItem(onbutton);
-        }
-
-        toggler.setTarget(this.ToggleSound, this);
-        toggler.setPosition(new cc.Point(window.innerWidth*.85,window.innerHeight*.1));
-
-        var menu = cc.Menu.create(playGame,toggler,share);
+        var menu = cc.Menu.create(playGame,share);
         menu.setPosition(new cc.Point(0,0));
 
         cc.AudioEngine.getInstance().setMusicVolume(0.5)
@@ -36,12 +23,14 @@ var Menu = cc.Layer.extend({
         this.addChild(menu);
         //bbm.register();
 
+        GameSettings.currentScene = this;
+        GameSettings.gameOver = false;
         _spinner.stop();
+
 
         return true;
     },
     PlayGame:function (pSender) {
-
         var scene = cc.Scene.create();
         var snakeLayer = Snake.layer();
         scene.addChild(snakeLayer);
@@ -56,33 +45,34 @@ var Menu = cc.Layer.extend({
         scene.addChild(mapselectionLayer);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
     },
-    ToggleSound: function () {
-        GameSettings.ToggleSound();
-    },
     Share: function () {
         bbm.inviteToDownload();
     }
 });
 
 Menu.layer = function () {
-
     var sg = new Menu();
-
     if (sg && sg.init()) {
         return sg;
     }
-
     return null;
 };
 
 Menu.scene = function () {
-
     var scene = cc.Scene.create();
-
     var layer = Menu.layer();
-
     scene.addChild(layer);
-
     return scene;
 }
 
+function createArray(length) {
+    var arr = new Array(length || 0),
+        i = length;
+
+    if (arguments.length > 1) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        while(i--) arr[length-1 - i] = createArray.apply(this, args);
+    }
+
+    return arr;
+}
