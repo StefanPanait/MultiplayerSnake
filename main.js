@@ -71,8 +71,6 @@ var ccApplication = cc.Application.extend({
             {src: 'Maps/elegantmansion.png'},
             {src: 'Maps/crystalcave.tmx'},
             {src: 'Maps/crystalcave.png'},
-            {src: 'Maps/pyramid.png'},
-            {src: 'Maps/pyramid.tmx'},
         //snake
             {src: 'images/btn_pressed_continue.png'},
             {src: 'images/btn_continue.png'},
@@ -83,19 +81,11 @@ var ccApplication = cc.Application.extend({
             {src: 'images/btn_pressed_resume.png'},
             {src: 'images/btn_quit.png'},
             {src: 'images/btn_pressed_quit.png'},
-        //sounds
-            {src: 'sound/The Complex.mp3'},
-            {src: 'images/btn_on_sound.png'},
-            {src: 'images/btn_off_sound.png'},
-            {src: 'sound/menubutton.wav'},
-            {src: 'sound/point.mp3'},
             ];
 
         cc.Loader.preload(resources, function () {
             cc.Director.getInstance().runWithScene(new this.startScene());
         }, this);
-
-        cc.AudioEngine.getInstance().init("mp3,ogg,wav");
 
         return true;
     }

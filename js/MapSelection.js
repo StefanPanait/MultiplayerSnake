@@ -33,32 +33,20 @@ var MapSelection = cc.Layer.extend({
         return true;
     },
     Back: function () {
-        if(GameSettings.sound) {
-            cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
-        }
         var scene = cc.Scene.create();
         var menuLayer = Menu.layer();
         scene.addChild(menuLayer);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
     },
     PlayElegantMansion:function (pSender) {
-        if(GameSettings.sound) {
-            cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
-        }
         GameSettings.mapName = 'elegantmansion';
         this.StartGame();
     },
     PlayCrystalCave:function (pSender) {
-        if(GameSettings.sound) {
-            cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
-        }
         GameSettings.mapName = 'crystalcave';
         this.StartGame();
     },
     PlayTropicalForest:function (pSender) {
-        if(GameSettings.sound) {
-            cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
-        }
         GameSettings.mapName = 'tropicalforest';
         this.StartGame();
     },

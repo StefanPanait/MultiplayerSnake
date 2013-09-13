@@ -13,5 +13,13 @@ body {
 	overflow: hidden;
 	position: fixed;
 	top: 0px;
-	width: 60%;
+	width: 100%;
+}
+
+#activity {
+    z-index: 999;
+    visibility: visible;
+    position: absolute;
+    left: 400px;
+    top: 1000px;
 }

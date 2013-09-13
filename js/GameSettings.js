@@ -5,7 +5,6 @@ var GameSettings = {
 	endTimer: 60,
 	speeds: [3.2, 4, 6.4, 8],
 	speedIndex: 2,
-	sound: true,
 	IncrementSpeed: function() {
 		if (this.speedIndex!=this.speeds.length-1) {
 			this.speedIndex++;
@@ -21,16 +20,6 @@ var GameSettings = {
 	},
 	SetSpeed: function(i) {
 		this.speedIndex = i;
-	},
-    ToggleSound: function () {
-    	this.sound = !this.sound;
-	    if (this.sound===false) {
-	        cc.AudioEngine.getInstance().pauseAllEffects();
-	        cc.AudioEngine.getInstance().pauseMusic();
-	    } else {
-	        cc.AudioEngine.getInstance().resumeAllEffects();
-	        cc.AudioEngine.getInstance().resumeMusic();
-	    }
 	}
 
 
