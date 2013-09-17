@@ -62,7 +62,9 @@ var MapSelection = cc.Layer.extend({
         GameSettings.mapName = 'tropicalforest';
         this.StartGame();
     },
-    StartGame: function() { 
+    StartGame: function() {
+        cc.AudioEngine.getInstance().resumeMusic();
+        cc.AudioEngine.getInstance().stopMusic();
         var target = document.getElementById('activity');
         _spinner.spin(target); 
         

@@ -2,9 +2,9 @@ var GameSettings = {
     fps: 30,
     mapName: null,
     gesturesSet: false,
-    endTimer: 60,
+    endTimer: 120,
     speeds: [3.2, 4, 6.4, 8],
-    speedIndex: 2,
+    speedIndex: 0,
     sound: true,
     running: false,
     touchX: null,
@@ -118,7 +118,7 @@ var GameSettings = {
         var btn_Play = new cc.MenuItemImage.create('images/btn_play.png', 'images/btn_pressed_play.png', this.CloseMenu, this);
         btn_Play.setPosition(new cc.Point(window.innerWidth * .5, window.innerHeight * .43));
 
-        var label_Goal = cc.LabelTTF.create("GOAL is 1000 points!", "Arial", 35);
+        var label_Goal = cc.LabelTTF.create("Collect as many points as you can!", "Arial", 35);
         label_Goal.setPosition(new cc.Point(window.innerWidth * .5, window.innerHeight * .5));
         label_Goal.setColor(new cc.Color3B(165, 42, 42));
         this.menuLayer.addChild(label_Goal);

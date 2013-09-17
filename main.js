@@ -46,19 +46,29 @@ var ccApplication = cc.Application.extend({
         //snake
             {src: 'images/snakebody.png'},
             {src: 'images/snakehead.png'},
+            {src: 'images/snakebodytest.png'},
+            {src: 'images/snakeheadtest.png'},
             {src: 'images/btn_play.png'},
             {src: 'images/btn_pressed_play.png'},
+            {src: 'images/rabbitpoint1.png'},
+            {src: 'images/rabbitpoint2.png'},
+            {src: 'images/rabbitpoint3.png'},
+            {src: 'images/rabbitpoint4.png'},
         //points
             {src: 'images/rabbit_points_01.png'},
         //main menu
             {src: 'images/btn_startgame.png'},
             {src: 'images/btn_pressed_startgame.png'},
             {src: 'images/btn_howtoplay.png'},
+            {src: 'images/btn_pressed_howtoplay.png'},
             {src: 'images/btn_highscore.png'},
             {src: 'images/menubackground.png'},
             {src: 'images/btn_share.png'},
             {src: 'images/btn_pressed_share.png'},
             {src: 'images/layer_menu.png'},
+            {src: 'images/tutorial1.png'},
+            {src: 'images/tutorial2.png'},
+            {src: 'images/tutorial3.png'},
         //mapselection
             {src: 'images/mapselection.png'},
             {src: 'images/elegantmansionthumb.png'},
@@ -87,12 +97,18 @@ var ccApplication = cc.Application.extend({
             {src: 'images/btn_pressed_resume.png'},
             {src: 'images/btn_quit.png'},
             {src: 'images/btn_pressed_quit.png'},
+            {src: 'images/btn_shake.png'},
+            {src: 'images/btn_pressed_shake.png'},
         //sounds
             {src: 'sound/The Complex.mp3'},
             {src: 'images/btn_on_sound.png'},
             {src: 'images/btn_off_sound.png'},
             {src: 'sound/menubutton.wav'},
             {src: 'sound/point.mp3'},
+            {src: 'sound/crunch.mp3'},
+            {src: 'sound/caverns.mp3'},
+            {src: 'sound/jungle.mp3'},
+            {src: 'sound/bonus.mp3'},
             ];
 
         cc.Loader.preload(resources, function () {
@@ -118,7 +134,7 @@ var ccApplication = cc.Application.extend({
             imagePad: 'images/freewill/pad.png',
             fixed: true,
             pos: [window.innerWidth*.5 - 80,window.innerHeight*.5 - (5*32)],
-            trigger: [0.0, 0.0, window.innerWidth, window.innerHeight],
+            trigger: [0.0, 0.0, window.innerWidth, window.innerHeight*.8],
             opacLow: 0.0,
             opacHigh: 0.0
         });
@@ -154,17 +170,17 @@ var ccApplication = cc.Application.extend({
 var myApp = new ccApplication(Menu.scene);
 
 function onPause () {
-    if (GameSettings.sound===true) {
+    if (GameSettings.sound) {
         cc.AudioEngine.getInstance().pauseAllEffects();
         cc.AudioEngine.getInstance().pauseMusic();
     }
     if (GameSettings.running) {
-        _g.snake.OpenMenu();
+        GameSettings.OpenMenu();
     }
 }
 
 function onResume () {
-    if (GameSettings.sound===true) {
+    if (GameSettings.sound) {
         cc.AudioEngine.getInstance().resumeAllEffects();
         cc.AudioEngine.getInstance().resumeMusic();
     }

@@ -9,6 +9,9 @@ var Snake = cc.Layer.extend({
     points: null,
     score: 0,
     label_Score: null,
+    label_Speed: null,
+    label_Multiplier: null,
+    label_CollisionBuffer: null,
     timer: 0,
     label_Timer: null,
     collision_Timer: 0,
@@ -19,6 +22,12 @@ var Snake = cc.Layer.extend({
     spriteLocations: [],
     spriteSpawnTimer: 0,
     pointToAdd: null,
+    scoreMultiplier: 1,
+    collisionBuffer: 0,
+    lastPointGained: null,
+    bonusAvailable: null,
+    shakeToggler: null,
+    speedupAvailable: null,
     init: function () {
         var tmx, n;
         this._super();
@@ -29,20 +38,74 @@ var Snake = cc.Layer.extend({
         this.physics.addEventListener('message', function (e) {
             if (e.data.msg === 'remove') { //remove point from map
                 if (GameSettings.sound) {
-                    cc.AudioEngine.getInstance().playEffect('sound/point.mp3');
+                    cc.AudioEngine.getInstance().playEffect('sound/crunch.mp3');
                 }
                 //update score
-                _g.snake.score += 10;
+                _g.snake.score = _g.snake.score + 10*_g.snake.scoreMultiplier;
                 //+_g.snake.points.sprites[e.data.index].points * _g.snake.player.body.length;
                 _g.snake.label_Score.setString("Score: " + _g.snake.score);
                 //update speed
                 if (_g.snake.points.sprites[e.data.index].speed === "increase") {
-                    GameSettings.IncrementSpeed();
-                    _g.snake.player.newSpeed = GameSettings.GetSpeed();
+                    console.log("speed up");
+                    _g.snake.speedupAvailable++;
+                    if (_g.snake.speedupAvailable===3) {
+                        GameSettings.IncrementSpeed();
+                        _g.snake.player.newSpeed = GameSettings.GetSpeed();
+                        _g.snake.speedupAvailable= 0;
+                    }
+                    if (_g.snake.bonusAvailable===-1) {
+                        _g.snake.bonusAvailable = 0;
+                        _g.snake.shakeToggler.activate();
+                        _g.snake.shakeToggler.setEnabled(false);
+                    }
+                    if (_g.snake.lastPointGained===2) {
+                        _g.snake.bonusAvailable++;
+                    } else {
+                        _g.snake.bonusAvailable = 0;
+                    }
+                    _g.snake.lastPointGained = 2;
+
                 }
-                if (_g.snake.points.sprites[e.data.index].speed === "decrease") {
-                    GameSettings.DecrementSpeed();
-                    _g.snake.player.newSpeed = GameSettings.GetSpeed();
+                if (_g.snake.points.sprites[e.data.index].multiplier === "increase") {
+                    _g.snake.scoreMultiplier += 1;
+                    console.log("increase multi "+_g.snake.scoreMultiplier);
+                    _g.snake.label_Multiplier.setString("Multiplier: "+_g.snake.scoreMultiplier+"x");
+                    if (_g.snake.bonusAvailable===-1) {
+                        _g.snake.bonusAvailable = 0;
+                        _g.snake.shakeToggler.activate();
+                        _g.snake.shakeToggler.setEnabled(false);
+                    }
+                    if (_g.snake.lastPointGained===3) {
+                        _g.snake.bonusAvailable++;
+                    } else {
+                        _g.snake.bonusAvailable = 0;
+                    }
+
+                    _g.snake.lastPointGained = 3;
+                }
+
+                if (_g.snake.points.sprites[e.data.index].collision === "increase") {
+                    _g.snake.collisionBuffer += 3;
+                    console.log("increase buffer: "+_g.snake.collisionBuffer);
+                    _g.snake.label_CollisionBuffer.setString("Collision Buffer: "+(((GameSettings.fps/2)+_g.snake.collisionBuffer)/30));
+                    if (_g.snake.bonusAvailable===-1) {
+                        _g.snake.bonusAvailable = 0;
+                        _g.snake.shakeToggler.activate();
+                        _g.snake.shakeToggler.setEnabled(false);
+                    }
+                    if (_g.snake.lastPointGained===4) {
+                        _g.snake.bonusAvailable++;
+                    } else {
+                        _g.snake.bonusAvailable = 0;
+                    }
+
+                    _g.snake.lastPointGained = 4;
+                }
+                console.log(_g.snake.bonusAvailable);
+                if (_g.snake.bonusAvailable===2) {
+                    _g.snake.shakeToggler.setEnabled(true);
+                    _g.snake.shakeToggler.activate();
+                    _g.snake.bonusAvailable=-1;
                 }
 
                 _g.snake.removeChild(_g.snake.points.sprites[e.data.index]);
@@ -50,7 +113,7 @@ var Snake = cc.Layer.extend({
                 _g.snake.spriteLocations.push(e.data.index);
 
                 var newLocation = NewBodyLocation();
-                _g.snake.player.body.push(cc.Sprite.create('images/snakebody.png'));
+                _g.snake.player.body.push(cc.Sprite.create('images/snakebodytest.png'));
                 _g.snake.player.body[_g.snake.player.body.length - 1].setPosition(
                     new cc.Point(
                         newLocation.x,
@@ -170,6 +233,23 @@ var Snake = cc.Layer.extend({
             startPoints: tmx.getObjectGroup('StartPoints').getObjects()
         });
 
+        //refresh variables
+        this.spriteLocations = [];
+        this.score= 0;
+        this.timer = 0;
+        this.collision_Timer = 0;
+        this.menuLayer = null;
+        this.menuLayerExists = false;
+        this.schedulerSetup = false;
+        this.spriteSpawnTimer = 0;
+        this.pointToAdd = null;
+        this.scoreMultiplier = 1;
+        this.collisionBuffer = 0;
+        this.lastPointGained = null;
+        this.bonusAvailable = 0;
+        this.shakeToggler = null;
+        this.speedupAvailable = 0;
+
         this.background = cc.Sprite.create('Maps/' + GameSettings.mapName + '.png');
         this.background.setAnchorPoint(new cc.Point(0.0, 0.0));
         this.background.setPosition(new cc.Point(0.0, 0.0));
@@ -177,7 +257,7 @@ var Snake = cc.Layer.extend({
 
         var startPoints = tmx.getObjectGroup('StartPoints').getObjects();
 
-        this.player = cc.Sprite.create('images/snakehead.png');
+        this.player = cc.Sprite.create('images/snakeheadtest.png');
         // this.player.setAnchorPoint(new cc.Point(0.5, 0.5));
         this.player.setPosition(new cc.Point(((startPoints[0].x + 1) + 30 / 2.0), ((startPoints[0].y + 1) + 30 / 2.0)));
         this.player.cx = ((startPoints[0].x + 1) + 30 / 2.0);
@@ -197,12 +277,8 @@ var Snake = cc.Layer.extend({
         this.points = tmx.getObjectGroup('Points').getObjects();
         this.points.sprites = new Object();
         for (n = 0; n < this.points.length; n = n + 1) {
-            var sprite = cc.Sprite.create('images/rabbit_points_01.png');
-
+            var sprite = ChoosePoint();
             sprite.points = this.points[n].points;
-            if (this.points[n].speed) {
-                sprite.speed = this.points[n].speed;
-            }
             this.points.sprites[this.points[n].x + "," + this.points[n].y] = sprite;
             this.points.sprites[this.points[n].x + "," + this.points[n].y].setPosition(
                 new cc.Point(
@@ -212,11 +288,10 @@ var Snake = cc.Layer.extend({
             );
             this.addChild(this.points.sprites[this.points[n].x + "," + this.points[n].y], 2);
         }
-        this.points.sprites.count = this.points.sprites.length;
-
+        
         /* Display Score */
         this.label_Score = cc.LabelTTF.create("Score: 0", "Arial", 35);
-        this.label_Score.setPosition(new cc.Point(window.innerWidth * .1, window.innerHeight * .1));
+        this.label_Score.setPosition(new cc.Point(window.innerWidth * .12, window.innerHeight * .1));
         this.label_Score.setColor(new cc.Color3B(0, 34, 102));
         this.addChild(this.label_Score, 5);
 
@@ -226,9 +301,54 @@ var Snake = cc.Layer.extend({
         this.label_Timer.setColor(new cc.Color3B(84, 84, 84));
         this.addChild(this.label_Timer);
 
+        /* Display Multiplier */
+        this.label_Multiplier = cc.LabelTTF.create("Multiplier: 1", "Arial", 35);
+        this.label_Multiplier.setPosition(new cc.Point(window.innerWidth * .5, window.innerHeight * .13));
+        this.label_Multiplier.setColor(new cc.Color3B(0, 34, 102));
+        this.addChild(this.label_Multiplier, 5);
+
+        /* Display Speed */
+        this.label_Speed = cc.LabelTTF.create("Speed: "+GameSettings.speedIndex, "Arial", 35);
+        this.label_Speed.setPosition(new cc.Point(window.innerWidth * .5, window.innerHeight * .08));
+        this.label_Speed.setColor(new cc.Color3B(0, 34, 102));
+        this.addChild(this.label_Speed, 5);
+
+                /* Display Score */
+        this.label_CollisionBuffer = cc.LabelTTF.create("Collision Buffer: 0.5", "Arial", 35);
+        this.label_CollisionBuffer.setPosition(new cc.Point(window.innerWidth * .5, window.innerHeight * .03));
+        this.label_CollisionBuffer.setColor(new cc.Color3B(0, 34, 102));
+        this.addChild(this.label_CollisionBuffer, 5);
+
+
+        var btn_shake = cc.MenuItemImage.create("images/btn_shake.png");
+        var btn_pressed_shake = cc.MenuItemImage.create("images/btn_pressed_shake.png");
+        this.shakeToggler = new cc.MenuItemToggle.create(btn_pressed_shake);
+        this.shakeToggler.addSubItem(btn_shake);
+        this.shakeToggler.setTarget(this.Shake, this);
+        this.shakeToggler.setPosition(new cc.Point(window.innerWidth*.80,window.innerHeight*.08));
+        this.shakeToggler.setEnabled(false);
+    
+        var menu = cc.Menu.create(this.shakeToggler);
+        menu.setPosition(new cc.Point(0,0));
+        this.addChild(menu,5);
+        
         GameSettings.currentScene = this;
         GameSettings.OpenGoal();
         GameSettings.running = true;
+
+        switch (GameSettings.mapName) {
+            case "elegantmansion":
+                cc.AudioEngine.getInstance().playMusic('sound/jungle.mp3',true);
+                break;
+            case "crystalcave":
+                cc.AudioEngine.getInstance().playMusic('sound/caverns.mp3',true);
+                break;
+        }
+        if (GameSettings.sound===false) {
+            cc.AudioEngine.getInstance().pauseMusic();
+        }
+
+
         //done loading
         _spinner.stop();
         return true;
@@ -258,13 +378,13 @@ var Snake = cc.Layer.extend({
         }
 
         //collision for too long
-        if (this.collision_Timer === GameSettings.fps) {
+        if (this.collision_Timer === (GameSettings.fps/2)+this.collisionBuffer) {
             GameSettings.OpenGameOver();
         }
         this.collision_Timer++;
 
         this.spriteSpawnTimer++;
-        if (this.spriteSpawnTimer % (60 * 2) === 0) {
+        if (this.spriteSpawnTimer % (60 * 4) === 0) {
             this.SpawnPoint();
         }
 
@@ -272,6 +392,7 @@ var Snake = cc.Layer.extend({
         if (((this.player.cx - 16) % 32 === 0) && ((this.player.cy - 16) % 32 === 0)) {
             this.player.cdirection = this.player.ndirection;
             this.player.speed = this.player.newSpeed;
+            this.label_Speed.setString("Speed: " + GameSettings.speedIndex);
         }
         switch (_g.snake.player.cdirection) {
         case 1:
@@ -323,11 +444,23 @@ var Snake = cc.Layer.extend({
         this.pointToAdd = this.spriteLocations[index];
         var x = parseInt(this.spriteLocations[index].split(",")[0]);
         var y = parseInt(this.spriteLocations[index].split(",")[1]);
-        var sprite = cc.Sprite.create('images/rabbit_points_01.png');
+        console.log("adding at: "+x +", "+y);
+        var sprite = ChoosePoint();
         this.points.sprites[this.spriteLocations[index]] = sprite;
         this.points.sprites[this.spriteLocations[index]].setPosition(new cc.Point((x + 16),(y + 16)));
         this.addChild(this.points.sprites[this.spriteLocations[index]],2);
         this.spriteLocations.splice(index, 1);
+    },
+    Shake: function () {
+        if (this.bonusAvailable===-1) {
+            this.shakeToggler.setEnabled(false);
+            this.score += 150*this.scoreMultiplier;
+            _g.snake.label_Score.setString("Score: " + _g.snake.score);
+            if (GameSettings.sound) {
+                cc.AudioEngine.getInstance().playEffect('sound/bonus.mp3');
+            }
+        }
+
     }
 });
 
@@ -408,4 +541,26 @@ function GetHeadMovement() {
         axis: axis,
         amount: amount
     }
+}
+
+function ChoosePoint () {
+    var type = Math.floor((Math.random() * 3));
+    if (type===0) {
+        var type = Math.floor((Math.random() * 3));
+        var positive = Math.floor((Math.random() * 2));
+        if (type===0) {
+            var sprite = cc.Sprite.create('images/rabbitpoint2.png');
+            sprite.speed = "increase";
+        } else if (type===1) {
+            var sprite = cc.Sprite.create('images/rabbitpoint3.png');
+            sprite.multiplier = "increase";
+        } else if (type===2) {
+            var sprite = cc.Sprite.create('images/rabbitpoint4.png');
+            sprite.collision = "increase";
+        } 
+    } else {
+        var sprite = cc.Sprite.create('images/rabbitpoint1.png');
+        sprite.normal = true;
+    }
+    return sprite;
 }
