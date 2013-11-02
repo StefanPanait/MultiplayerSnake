@@ -29,11 +29,11 @@ var MapSelection = cc.Layer.extend({
         menu.setPosition(new cc.Point(0,0));
 
         this.addChild(menu,0);
-        GameSettings.currentScene = this;
+        WildFeast.currentScene = this;
         return true;
     },
     Back: function () {
-        if(GameSettings.sound) {
+        if(WildFeast.sound) {
             cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
         }
         var scene = cc.Scene.create();
@@ -42,24 +42,24 @@ var MapSelection = cc.Layer.extend({
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
     },
     PlayElegantMansion:function (pSender) {
-        if(GameSettings.sound) {
+        if(WildFeast.sound) {
             cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
         }
-        GameSettings.mapName = 'elegantmansion';
+        WildFeast.mapName = 'elegantmansion';
         this.StartGame();
     },
     PlayCrystalCave:function (pSender) {
-        if(GameSettings.sound) {
+        if(WildFeast.sound) {
             cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
         }
-        GameSettings.mapName = 'crystalcave';
+        WildFeast.mapName = 'crystalcave';
         this.StartGame();
     },
     PlayTropicalForest:function (pSender) {
-        if(GameSettings.sound) {
+        if(WildFeast.sound) {
             cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
         }
-        GameSettings.mapName = 'tropicalforest';
+        WildFeast.mapName = 'tropicalforest';
         this.StartGame();
     },
     StartGame: function() {
@@ -68,10 +68,9 @@ var MapSelection = cc.Layer.extend({
         var target = document.getElementById('activity');
         _spinner.spin(target); 
         
-        var scene = cc.Scene.create();
-        var snakeLayer = Snake.layer();
-        scene.addChild(snakeLayer);
+        var scene = WildFeast.WildFeast();
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
+        _spinner.stop();
     }
 });
 

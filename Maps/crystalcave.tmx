@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="24" height="40" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="24" height="34" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="tile21" tilewidth="32" tileheight="32">
   <image source="tile21.png" width="512" height="512"/>
  </tileset>
@@ -9,27 +9,27 @@
  <tileset firstgid="513" name="tile04-edited" tilewidth="32" tileheight="32">
   <image source="tile04-edited.jpg" width="515" height="515"/>
  </tileset>
- <layer name="background" width="24" height="40">
+ <layer name="background" width="24" height="34">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAMBKHrH+8TrcdQcNVUVVX1+QPQdxOu
+   eJztwwEJAAAMBKHrH+8TLcdAwVVTVVV98ACF351/
   </data>
  </layer>
- <layer name="tile21" width="24" height="40">
+ <layer name="tile21" width="24" height="34">
   <data encoding="base64" compression="zlib">
-   eJztlz8OQUEQxqdxBAeg0vqX6EVDreEMRKMSouE0SqXSCdyCG1AZYZPNmJn99qEzyVe83dnfzM7uvJfXJKLWj9Rm9QizkzF+Zl2MuZ7CPznS7Mq6ZfDRGEgOFj8VA9mXxc/heuyifOmTw5escDcsFsq38vPuRuxXlI/kqK1B+UidvXmNj5yj54/yrfwXxvxE8c/JP2iqxKyxlgX5OxFrxZqLOnReYxa/5NTjIMbnijasrVgX88uJ+pB4lmOWxf2r3YPUWaP95fnulNheT+XyD8o42nspvrf+E76XH9KDwU97P3t8tMfDs5Z/qiZeLOmHnK9lyF4+4Xuxgn2D79VJ8vcJfyRWbJJ/jJh91iAzhpW/luuINRbrkD1p5yvfa0ieKX58/yusKj2/Q0X5M4dfZzXo+R1K3WtLa3qv3YPdpd/9XwzBevztb5bdASzjLtc=
+   eJy1lz8OQUEQxqdxBAeg0vqX6EVDreEMRKMSouE0SuUrncAtuAGVETbZjJnZbx8m+Yq3O/ub2dmd9/LaRNT5k7qsAWF2NsYvrKsxN1D4Z0ea3Vj3DD4aA8nB4qdiIPuy+Dlcj12WL31y+JIV7obFQvlWft7diP3K8pEctTUoH6mzN6/xkXP0/FG+lf/KmJ8p/jn5B82VmA3WuiT/IGJtWEtRh957zOJXnHoUYnypaMfai3Uxv5qoD4lnOWZZ3L/aPUidNdpfnu9Bie31VC6/UMbR3kvxvfXf8L38kB4Mftr72eOjPR6etfxTNfFiST/kfC1D9vIN34sV7Bd8r06Sf0z4I7Fik/xTxByyRpkxrPy1XCesqViH7Ek7X/leQ/JM8eP7X2PV6fUdKstfOPwmq0Wv71DqXlva0mftnuw+/e//Ysx6AMLtLtc=
   </data>
  </layer>
- <layer name="tile13" width="24" height="40">
+ <layer name="tile13" width="24" height="34">
   <data encoding="base64" compression="zlib">
-   eJzt1DdIBEEAheG70mxrtjXbmm3NtmZbc6pUMGClgtqYY2lnFnNWzGDOFoI5gIKCEf/jEI6DlRXnioN98MEwO/uYjSqV8SVPrWWolKm19NPDXC/60I8BDP5xHzmsz5U4Z5r5GcxiDvNYEHidG3RtYgvb2MGuwP5Sus6wh32c40Kn34SxKcxgDgtYwgrWMvbxyJonXOIKz3jROc+GsS3sYA8HOMIJzgKu04UOV7jBHR7whBe8BfT70OELP/gjAIEIQvAv/bUcq0M9GtApsTaE+VCEIRwRiEQUomXuX9M9JLE2hvlYxCEeCUhEEpJl9mu6FyXWpjCfijSkIwOZyEK2zH5Nt/79+kk+4wIUogvdKEIxSgQ833I6KlCJSUyhCtWoEdDfSEcTmtGCVrShHR0G/F8q+V/030ep91OJEiXaDPNdjGAUYxjHhMBvZYmuZaxgFWtYF9h/QNchjnCME5wK7L+m6wa3uMM9HgT2v9L1hnd84BNfyr9KiZHlG9aLXlY=
+   eJzt1DdIA1EcgPFktLvaXe2udle7q93V3iYVLDipoC72OrrZxd4VO9i7g2AvoKBgxS8EIQROTnxBhPvDD46Xdx93yeVUqv83OWotQ02JWkt/uljrRg960Yf+H15HFvuzJc6ZZH0K05jBLOYE3ucarXVsYBNb2BbYL6Z1gh3s4hRnOn0jjo1hAlOYwRwWsJRxHffsecA5LvCIJ53zrDi2hg1sYQd7OMBRwH060XCGC1zhBnd4wFNA34uGN3zgCz/4IwCB3/Sr+awGtahDu8TeINaDEYJQhCEcEYiUef2a9oDE3ijWoxGDWMQhHglIlNnXtOcl9iaxnowUpCIN6chApsy+pq3/fX1NLsd5yEcHOlGAQhQJ+H1LaZShHOOYQAUqUSWgX0+jAY1oQjNa0Io2A74vlfnd6D+PUs+nMsooo51B/hdDGMYIRjEm8L+yQGsRS1jGClYF9vdo7eMAhzjCscD+Ja0rXOMGt7gT2H+m9YJXvOEdH3/wrvoEiJ9eVg==
   </data>
  </layer>
- <layer name="tiel04-edited" width="24" height="40">
+ <layer name="tiel04-edited" width="24" height="34">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGASVgBhMDw0wkDAPIYrOYcOsnBFYQoXcVFczfBKRXQtkroezNTPjNvwcUPw/ED4iwfyWS+cQCmPl7yfAfMfaBzL9PwP2w8DnEhGomiD5MIHzeAcXfA/EHIszHB3CZ/w8o/h8kx4xb7w6g/E4CeBcO829Dxe9SkL7wgddQc9/SyPxRMApGwShABwB9eis0
+   eJxjYBgFo2AUjIJRMApGASVgBhMDw0wkDAPIYrOYcOsnBFYQoXcVFczfBKRXQtkroezNTPjNvwcUPw/ED4iwfyWS+cQCmPl7yfAfMfaBzL9PwP2w8DnEhGomiD5MIHzeAcXfA/EHIszHB3CZ/w8o/h8kx4xb7w6g/E4CeBcO829Dxe9SkL7wgddQc9/SyPxRMDwBAELLKzQ=
   </data>
  </layer>
- <objectgroup name="Walls" width="24" height="40">
+ <objectgroup name="Walls" width="24" height="34">
   <object x="0" y="0" width="768" height="32"/>
   <object x="0" y="32" width="32" height="1056"/>
   <object x="736" y="32" width="32" height="1056"/>
@@ -71,10 +71,10 @@
   <object x="640" y="768" width="32" height="64"/>
   <object x="352" y="640" width="32" height="64"/>
  </objectgroup>
- <objectgroup name="StartPoints" width="24" height="40">
+ <objectgroup name="StartPoints" width="24" height="34">
   <object x="32" y="32" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="Points" width="24" height="40">
+ <objectgroup name="Points" width="24" height="34">
   <object x="480" y="736" width="32" height="32">
    <properties>
     <property name="points" value="30"/>

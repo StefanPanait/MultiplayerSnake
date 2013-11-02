@@ -118,9 +118,9 @@ var ccApplication = cc.Application.extend({
         cc.AudioEngine.getInstance().init("mp3,ogg,wav");
 
         console.log("adding back/fore listeners");
-        blackberry.event.addEventListener("pause", onPause);
+/*        blackberry.event.addEventListener("pause", onPause);
         blackberry.event.addEventListener("resume", onResume);
-        blackberry.event.addEventListener("swipedown", onSwipeDown);
+        blackberry.event.addEventListener("swipedown", onSwipeDown);*/
 
         var controls = document.getElementById("freewill");
         controls.style.visibility="hidden";
@@ -140,25 +140,25 @@ var ccApplication = cc.Application.extend({
         });
 
         freewill.move.onTouchStart = function (touch, point) {
-            GameSettings.touchX = point[0];
-            GameSettings.touchY = point[1];
-            GameSettings.touchStarted=true;
+            WildFeast.touchX = point[0];
+            WildFeast.touchY = point[1];
+            WildFeast.touchStarted=true;
         }
 
         freewill.move.onTouchMove = function (touch, point) {
-            if (GameSettings.touchStarted) {
-                if ((GameSettings.touchY - point[1]) < (-50)) {
-                    _g.snake.player.ndirection = 4;
-                    GameSettings.touchStarted = false;
-                } else if (GameSettings.touchY- point[1] > 50) {
-                    _g.snake.player.ndirection = 3;
-                    GameSettings.touchStarted = false;
-                } else if (GameSettings.touchX - point[0] > 50) {
-                    _g.snake.player.ndirection = 1;
-                    GameSettings.touchStarted = false;
-                } else if (GameSettings.touchX - point[0] < -50) {
-                    _g.snake.player.ndirection = 2;
-                    GameSettings.touchStarted = false;
+            if (WildFeast.touchStarted) {
+                if ((WildFeast.touchY - point[1]) < (-50)) {
+                    WildFeast.gameplayLayer.player.ndirection = 4;
+                    WildFeast.touchStarted = false;
+                } else if (WildFeast.touchY- point[1] > 50) {
+                    WildFeast.gameplayLayer.player.ndirection = 3;
+                    WildFeast.touchStarted = false;
+                } else if (WildFeast.touchX - point[0] > 50) {
+                    WildFeast.gameplayLayer.player.ndirection = 1;
+                    WildFeast.touchStarted = false;
+                } else if (WildFeast.touchX - point[0] < -50) {
+                    WildFeast.gameplayLayer.player.ndirection = 2;
+                    WildFeast.touchStarted = false;
                 }
             }
         };
@@ -170,22 +170,22 @@ var ccApplication = cc.Application.extend({
 var myApp = new ccApplication(Menu.scene);
 
 function onPause () {
-    if (GameSettings.sound) {
+    if (WildFeast.sound) {
         cc.AudioEngine.getInstance().pauseAllEffects();
         cc.AudioEngine.getInstance().pauseMusic();
     }
-    if (GameSettings.running) {
-        GameSettings.OpenMenu();
+    if (WildFeast.running) {
+        WildFeast.OpenMenu();
     }
 }
 
 function onResume () {
-    if (GameSettings.sound) {
+    if (WildFeast.sound) {
         cc.AudioEngine.getInstance().resumeAllEffects();
         cc.AudioEngine.getInstance().resumeMusic();
     }
 }
 
 function onSwipeDown () {
-    GameSettings.OpenMenu();
+    WildFeast.OpenMenu();
 }

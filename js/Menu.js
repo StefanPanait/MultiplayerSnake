@@ -15,38 +15,44 @@ var Menu = cc.Layer.extend({
         var btn_howtoplay = new cc.MenuItemImage.create('images/btn_howtoplay.png','images/btn_pressed_howtoplay.png', this.Tutorial, this);
         btn_howtoplay.setPosition(new cc.Point(window.innerWidth*.67,window.innerHeight*.46));
 
-        var menu = cc.Menu.create(playGame,share,btn_howtoplay);
+        var btn_multiplayer = cc.MenuItemFont.create("Multiplayer", this.Multiplayer, this)
+        btn_multiplayer.setPosition(new cc.Point(window.innerWidth*.67,window.innerHeight*.40));
+
+        var menu = cc.Menu.create(playGame,share,btn_howtoplay,btn_multiplayer);
         menu.setPosition(new cc.Point(0,0));
 
         cc.AudioEngine.getInstance().setMusicVolume(0.5)
 
-        if(GameSettings.sound) {
+        if(WildFeast.sound) {
             cc.AudioEngine.getInstance().playMusic('sound/The Complex.mp3',true);
         }
 
         this.addChild(menu);
-        bbm.register();
+        //bbm.register();
 
-        GameSettings.currentScene = this;
-        GameSettings.gameOver = false;
+        WildFeast.currentScene = this;
+        WildFeast.gameOver = false;
 
 
         _spinner.stop();
         return true;
     },
-    PlayGame:function (pSender) {
-        var scene = cc.Scene.create();
-        var snakeLayer = Snake.layer();
-        scene.addChild(snakeLayer);
-        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
-    },
     MapSelection: function () {
-        if(GameSettings.sound) {
+        if(WildFeast.sound) {
             cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
         }
         var scene = cc.Scene.create();
         var mapselectionLayer = MapSelection.layer();
         scene.addChild(mapselectionLayer);
+        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
+    },
+    Multiplayer: function () {
+        if(WildFeast.sound) {
+            cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
+        }
+        var scene = cc.Scene.create();
+        var multiplayerLayer = Multiplayer.layer();
+        scene.addChild(multiplayerLayer);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
     },
     Share: function () {

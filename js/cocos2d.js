@@ -15,11 +15,13 @@
         tag:'gameCanvas', //the dom element to run cocos2d on
         engineDir:'cocos/cocos2d/',
         appFiles:[
-        'js/GameSettings.js',
-        'js/Snake.js',
+        'js/WildFeast.js',
         'js/MapSelection.js',
         'js/Menu.js',
-        'js/lib/Freewill.js'
+        'js/lib/Freewill.js',
+        'js/gameplayLayer.js',
+        'js/displayLayer.js',
+        'js/Multiplayer.js'
         ]
     };
     window.addEventListener('DOMContentLoaded', function () {
