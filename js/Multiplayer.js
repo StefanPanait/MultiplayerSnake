@@ -1,11 +1,19 @@
 var Multiplayer = cc.Layer.extend({
-    gameName: null,
-    socket: null,
     init:function () {
+        this.gameName = null;
+        this.server = null;
+        this.lbl_latency = null;
+        this.last_ping_time = null;
+
+
         var background = cc.Sprite.create('images/mapselection.png');
         background.setAnchorPoint(new cc.Point(0.0, 0.0));
         background.setPosition(new cc.Point(0,0));
-        this.addChild(background, 0);
+        this.addChild(background);
+
+        this.lbl_latency = cc.LabelTTF.create('-1',  'Times New Roman');
+        this.lbl_latency.setPosition(new cc.Point(window.innerWidth*.85,window.innerHeight*.2));
+        this.addChild(this.lbl_latency);
 
         if (!localStorage.name) {
             localStorage.name =prompt("Player Name","");
@@ -16,57 +24,71 @@ var Multiplayer = cc.Layer.extend({
             this.addChild(name_TF,1);*/
         }
 
-        socket = io.connect('http://localhost:4000');
+        var server = io.connect('http://localhost:4000');
         setTimeout(function() {if (!WildFeast.connected) console.log("Couldn't Connect To Server!");},5000);
 
-        socket.on('onconnected', function (data) {
+        server.on('onconnected', function (data) {
             console.log("connected");
             WildFeast.connected = true;
-            socket.emit("setName", {name: localStorage.name});
-        });
+            server.emit("setName", {name: localStorage.name});
+            console.log(new Date().getTime());
 
-        socket.on('message', function (data) {
+
+        }.bind(this));
+
+        server.on('message', function (data) {
             console.log("message: ", data);
-        });
+        }.bind(this));
 
-        socket.on('room_information', function (data) {
+        server.on('room_information', function (data) {
             console.log("room is: ",data);
             console.log("Room id is: " +data.id);
-        });
+        }.bind(this));
 
+        server.on('ping', function (data) {
+            this.lbl_latency.setString(String(data.latency));
+            server.emit("ping", {});
+        }.bind(this));
 
-        this.gameName =prompt("Enter Game Name","");
-
-        var btn_join = cc.MenuItemFont.create("Join", this.Join, this)
+        var btn_gameName = cc.MenuItemFont.create("Game Name", this.getGameName, this)
+        btn_gameName.setPosition(new cc.Point(window.innerWidth*.67,window.innerHeight*.35));
+        
+        var btn_join = cc.MenuItemFont.create("Join", this.join, this)
         btn_join.setPosition(new cc.Point(window.innerWidth*.67,window.innerHeight*.40));
-        var btn_create = cc.MenuItemFont.create("Create", this.Host, this)
-        btn_create.setPosition(new cc.Point(window.innerWidth*.57,window.innerHeight*.40));
+
+        var btn_create = cc.MenuItemFont.create("Create", this.create, this)
+        btn_create.setPosition(new cc.Point(window.innerWidth*.67,window.innerHeight*.55));
 
         var back = new cc.MenuItemImage.create('images/btn_back.png','images/btn_pressed_back.png', this.Back, this);
         back.setPosition(new cc.Point(window.innerWidth*.15,window.innerHeight*.2));
 
 
 
-        var menu = cc.Menu.create(cavernsImage,cavernsLabel,elegantmansionLabel,elegantmansionthumb,back);
+        var menu = cc.Menu.create(back,btn_join, btn_gameName, btn_create);
         menu.setPosition(new cc.Point(0,0));
+        this.addChild(menu);
 
+        this.server = server;
         WildFeast.currentScene = this;
         return true;
     },
     Back: function () {
-    if(WildFeast.sound) {
-        cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
-    }
-    var scene = cc.Scene.create();
-    var menuLayer = Menu.layer();
-    scene.addChild(menuLayer);
-    cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
+        if(WildFeast.sound) {
+            cc.AudioEngine.getInstance().playEffect('sound/menubutton.wav');
+        }
+        var scene = cc.Scene.create();
+        var menuLayer = Menu.layer();
+        scene.addChild(menuLayer);
+        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(1.2, scene));
     },
-    Join: function () {
-        socket.emit('joinRoom', {gameName: gameName});
+    join: function () {
+        this.server.emit('joinRoom', {gameName: this.gameName});
     },
-    Host: function () {
-        socket.emit('createRoom', {gameName: gameName});
+    create: function () {
+        this.server.emit('createRoom', {gameName: this.gameName});
+    },
+    getGameName: function () {
+        this.gameName =prompt("Enter Game Name","");
     }
 });
 
