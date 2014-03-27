@@ -11,21 +11,12 @@ var MapSelection = cc.Layer.extend({
         var elegantmansionLabel = new cc.MenuItemImage.create('images/btn_mansion.png','images/btn_pressed_mansion.png', this.PlayElegantMansion, this);
         elegantmansionLabel.setPosition(new cc.Point(window.innerWidth*.5,window.innerHeight*.7));
 
-        var cavernsImage = new cc.MenuItemImage.create('images/crystalcavethumb.png','images/crystalcavethumb.png', this.PlayCrystalCave, this);
-        cavernsImage.setPosition(new cc.Point(window.innerWidth*.2,window.innerHeight*.6));
-
-        var cavernsLabel = new cc.MenuItemImage.create('images/btn_caverns.png','images/btn_pressed_caverns.png', this.PlayCrystalCave, this);
-        cavernsLabel.setPosition(new cc.Point(window.innerWidth*.5,window.innerHeight*.6));
-
-        var tropicalforestthumb = new cc.MenuItemImage.create('images/tropicalforestthumb.png','images/tropicalforestthumb.png', this.PlayTropicalForest, this);
-        tropicalforestthumb.setPosition(new cc.Point(window.innerWidth*.2,window.innerHeight*.5));
-
         var back = new cc.MenuItemImage.create('images/btn_back.png','images/btn_pressed_back.png', this.Back, this);
         back.setPosition(new cc.Point(window.innerWidth*.15,window.innerHeight*.2));
 
 
 
-        var menu = cc.Menu.create(cavernsImage,cavernsLabel,elegantmansionLabel,elegantmansionthumb,back);
+        var menu = cc.Menu.create(elegantmansionLabel,elegantmansionthumb,back);
         menu.setPosition(new cc.Point(0,0));
 
         this.addChild(menu,0);
