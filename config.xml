@@ -1,37 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<widget xmlns="http://www.w3.org/ns/widgets" 
-    xmlns:rim="http://www.blackberry.com/ns/widgets"
-    version="1.0.0.0" id="Wild Feast">   
- 
-    <name>Wild Feast</name> 
+<?xml version="1.0" encoding="UTF-8"?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.wlu.wildfeast"
+        version   = "1.0.1">
+
+    <!-- versionCode is optional and Android only -->
+    <!-- -->
+    <preference name="phonegap-version" value="3.0.0" />
+
+    <name>Wild Feast</name>
     <author>Stefan Panait</author>
-    <description>Classic Snake With Modern Features</description>
+    <description>
+        Snake style game for mobile.
+    </description>
 
+    <author email="stefanapanait@gmail.com">
+        Stefan Panait
+    </author>
 
-    <rim:permissions>
-		<rim:permit>bbm_connect</rim:permit>
-	</rim:permissions>
-
-	<!-- icon that represents the application on the Home screen of the BlackBerry device -->
-	<icon src="images/app_icon.png"/>
-
-    <content rim:allowInvokeParams="true" src="index.html" />
-
-	<feature id="blackberry.ui.dialog" />
-	<feature id="blackberry.ui.toast" />
-	<feature id="blackberry.event" required="true" />
-	<feature id="blackberry.ui.contextmenu" />
-	<feature id="blackberry.invoked" required="true" />
-	<feature id="blackberry.invoke" required="true" />
-	<feature id="blackberry.app" required="true">
-		<param name="mode" value="portrait" />
-	</feature>
-	
-
-	<feature id="blackberry.ui.toast" />
-	    <access uri="*" subdomains="true" />
-	    <feature id="blackberry.app.orientation">
-	    <param name="mode" value="portrait" />
-    </feature> 
-    <feature id="blackberry.bbm.platform" />
+    <icon src="icon.png" />
 </widget>
