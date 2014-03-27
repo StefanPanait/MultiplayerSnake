@@ -4,6 +4,7 @@ var Menu = cc.Layer.extend({
         var background = cc.Sprite.create('images/menubackground.png');
         background.setAnchorPoint(new cc.Point(0.0, 0.0));
         background.setPosition(new cc.Point(0,0));
+        background.setScale(0.5);
         this.addChild(background);
 
         var playGame = new cc.MenuItemImage.create('images/btn_startgame.png','images/btn_pressed_startgame.png', this.MapSelection, this);

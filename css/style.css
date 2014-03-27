@@ -1,3 +1,6 @@
+html {
+	height:100;
+}
 body {
 	background-color: white;
 	cursor: default;
@@ -23,4 +26,10 @@ body {
     position: absolute;
     left: 400px;
     top: 1000px;
+}
+
+#menuPage {
+	background-color: black;
+}
+.background {
 }
