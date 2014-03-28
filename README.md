@@ -1,5 +1,5 @@
-Personal project to create a real-time multi-player snake game using cocos2d-html for front-end and Node.js for the back-end. 
+Personal project to create a real-time snake game with new gameplay mechanics.
+Multiplayer is not yet available.
 
-Also using box2d for collisions. The single player version is working and posted on blackberry app store.
-
-Multi-player version held difficult challenges such as client-server synchronization which I have not been finished yet.
+Application can be downloaded from BlackBerry World here:
+http://appworld.blackberry.com/webstore/content/35537887/?lang=en&countrycode=CA
