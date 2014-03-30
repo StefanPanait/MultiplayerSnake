@@ -1,3 +1,5 @@
+Wild Feast
+=========
 Personal project to create a real-time snake game with new gameplay mechanics.
 Multiplayer is not yet available.
 
